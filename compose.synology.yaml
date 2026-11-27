@@ -1,0 +1,44 @@
+name: bookorbit-turkish-metadata
+
+services:
+  turkish-metadata:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${PROVIDER_IMAGE:-bookorbit-turkish-metadata-provider:0.1.1}
+    platform: linux/amd64
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    mem_limit: 256m
+    environment:
+      AUTH_TOKEN: ${AUTH_TOKEN:-}
+      USER_AGENT: ${USER_AGENT:-BookOrbitTurkishMetadata/0.1.1}
+      SOURCE_INTERVAL_SECONDS: ${SOURCE_INTERVAL_SECONDS:-2}
+      REQUEST_TIMEOUT_SECONDS: ${REQUEST_TIMEOUT_SECONDS:-5}
+      DEADLINE_SECONDS: ${DEADLINE_SECONDS:-12}
+      SEARCH_CACHE_TTL: ${SEARCH_CACHE_TTL:-900}
+      BOOK_CACHE_TTL: ${BOOK_CACHE_TTL:-86400}
+      CACHE_MAX_BYTES: ${CACHE_MAX_BYTES:-16777216}
+      API_REQUESTS_PER_MINUTE: ${API_REQUESTS_PER_MINUTE:-60}
+      MAX_RESULTS: ${MAX_RESULTS:-5}
+    expose:
+      - "8080"
+    networks:
+      lan:
+        ipv4_address: ${PROVIDER_IPV4_ADDRESS:?Set PROVIDER_IPV4_ADDRESS to an unused address outside DHCP}
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+networks:
+  lan:
+    external: true
+    name: ${BOOKORBIT_NETWORK:?Set BOOKORBIT_NETWORK to your existing macvlan network}
