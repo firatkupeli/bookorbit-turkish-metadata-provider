@@ -50,29 +50,64 @@ tamamı taranmaz; her sorgu için sonuç garantisi yoktur.
 
 ## Docker ile kurulum
 
-Henüz herkese açık bir hazır imaj yayımlanmış olduğu varsayılmaz. Bu paket
-kaynak koddan yerel derleme içindir. Docker Engine ve Compose v2 gerekir.
+Docker Engine ve Compose v2 gerekir. Herkese açık hazır imaj:
+
+```text
+ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+```
+
+İmaj `linux/amd64` ve `linux/arm64` için yayımlanmıştır.
+Her iki mimarinin katmanları GitHub hesabı veya kişisel erişim anahtarı
+kullanılmadan indirilip SHA-256 özetleriyle doğrulanmıştır.
+
+### Hazır imajla kurulum
 
 1. Bu deponun dosyalarını tek klasöre çıkarın.
 2. `.env.example` dosyasını aynı klasörde `.env` adıyla kopyalayın.
 3. `.env` içindeki `BOOKORBIT_NETWORK` değerini BookOrbit **sunucu
    konteynerinin** bağlı olduğu mevcut Docker ağıyla değiştirin.
-   `bookorbit_default` yalnız örnektir. `PROVIDER_IMAGE` boş kalabilir.
-4. Klasörde çalıştırın:
+   `bookorbit_default` yalnız örnektir.
+4. Aynı `.env` dosyasındaki `PROVIDER_IMAGE` satırını şöyle ayarlayın:
+
+   ```dotenv
+   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+   ```
+
+5. Proje klasöründe çalıştırın:
 
    ```sh
    docker compose config --quiet
-   docker compose up -d --build
+   docker compose pull
+   docker compose up -d --no-build
    docker compose ps
    ```
+
+GHCR'a giriş yapmak veya token tanımlamak gerekmez.
+`pull` hazır imajı indirir; `--no-build` yerel derlemeyi kapatır.
 
 Compose mevcut ağı kullanır; yeni ağ veya veritabanı oluşturmaz. Port 8080
 yalnız Docker ağına açılır. BookOrbit ve sağlayıcı aynı ağda olmalıdır.
 
-**Synology Container Manager / DS224+:** Ortak ağ veya isteğe bağlı macvlan sabit
-IP kurulumu için [adım adım Synology rehberini](docs/SYNOLOGY.md) kullanın.
-Genel `compose.yaml` makinenin mimarisinde derler; DS224+ örneği amd64 seçer.
-ARM64 için yayın iş akışı hazırlanmıştır; gerçek ARM cihaz testi yapılmamıştır.
+### Kaynak koddan derleme
+
+Yerel derleme için `.env` içindeki `PROVIDER_IMAGE` değerini boş bırakın.
+`BOOKORBIT_NETWORK` değerini kendi mevcut ağınıza göre ayarlayıp çalıştırın:
+
+```sh
+docker compose config --quiet
+docker compose up -d --build
+docker compose ps
+```
+
+### Synology DS224+
+
+Ortak ağ veya isteğe bağlı macvlan sabit IP kurulumu için
+[adım adım Synology rehberini](docs/SYNOLOGY.md) kullanın.
+Hazır imaj kullanırken kendi ağ/IP ayarlarınızla birlikte `PROVIDER_IMAGE`
+değerini yukarıdaki GHCR adresine ayarlayın.
+
+DS224+ için `linux/amd64` kullanılır. ARM64 imajı da yayımlanmıştır;
+gerçek ARM cihaz üzerinde çalışma testi yapılmamıştır.
 
 ## BookOrbit'e ekleme
 
