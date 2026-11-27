@@ -1,63 +1,73 @@
-# GitHub yayın hazırlığı
+# GitHub yayını ve sonraki sürümler
 
-Bu kaynak paketi yerel olarak hazırlanmıştır. GitHub deposu, GitHub Release
-veya GHCR imajı bu işlemle oluşturulmaz.
+## Yayımlanmış sürüm
 
-## Yerel paket
+- [Kaynak depo](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider)
+- [v0.1.1 erken beta](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/releases/tag/v0.1.1)
+- [Container paketi](https://github.com/users/firatkupeli/packages/container/bookorbit-turkish-metadata-provider)
+- [Başarılı yayın iş akışı](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46027864425)
+
+Herkese açık imajın `PROVIDER_IMAGE` değeri:
+
+```dotenv
+PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+```
+
+amd64 ve arm64 imajları için oturumsuz indirme ve SHA-256 denetimi tamamlandı.
+[Doğrulama kaydı](VERIFICATION.md).
+Hazır imaj kurulumunda `docker compose pull`, ardından
+`docker compose up -d --no-build` kullanın.
+Genel kurulum [Türkçe README](../README.md) ve [English README](../README.en.md)
+içindedir; GUI adımları [Synology rehberindedir](SYNOLOGY.md).
+
+## Kaynak paketi oluşturma
 
 ```sh
 python tools/prepare_release.py --check-only
 python tools/prepare_release.py
 ```
 
-Araç yalnız izin verilen kaynak dosyalarını toplar, bilinen özel adres/anahtar
+Bu komutlar yerel ZIP üretir; GitHub veya GHCR'a yükleme yapmaz.
+Araç yalnız izin verilen kaynak dosyalarını toplar, seçili özel adres/anahtar
 desenlerini denetler ve `dist` altında kaynak ZIP'i ile SHA-256 dosyası oluşturur.
 ZIP içindeki `RELEASE-MANIFEST.json` dosya özetlerini içerir.
 .env, sanal ortam, önbellekler, eski arşivler ve yerel Compose override dosyaları
-pakete alınmaz. Taramalar tüm sır türlerini yakalama garantisi vermez.
+pakete alınmaz. Taramalar kapsamlı sır/güvenlik denetimi sayılmaz.
 
-GitHub'a yüklerken bu yeni kaynak ZIP'ini ayrı boş klasöre çıkarın ve içindeki
-proje kökünün **dosyalarını** kullanın. ZIP'i tek dosya olarak yüklemek depoyu
-çalışır bir kaynak deposu hâline getirmez. Gizli `.github`, `.gitignore` ve
-env örneklerini de dahil edin. Eski NAS dağıtım ZIP'lerini yüklemeyin.
+GitHub'a dosya yüklerken ZIP'i ayrı boş klasöre çıkarın ve proje kökünün
+**dosyalarını** yükleyin. `.github`, `.gitignore` ve env örnekleri dahil
+olmalıdır. Gerçek .env ve eski NAS arşivlerini eklemeyin.
+Manifest bir dosya anlık görüntüsünü tarif eder; belgeler değiştirildiğinde
+manifest de birlikte yenilenmelidir.
 
-## Daha sonra yapılacak yayın adımları
+## Sonraki sürümü yayımlama
 
-1. Kendi hesabınızda boş `bookorbit-turkish-metadata-provider` deposu oluşturun;
-   bu paketin README ve lisansı bulunduğu için ayrı başlangıç dosyası üretmeyin.
-2. Temiz kaynak dosyalarını yükleyin. Gerçek .env dosyasını eklemeyin.
-3. GitHub Actions **Tests** iş akışının başarılı olmasını bekleyin.
-   Güvenlik bildirim kanalını etkinleştirin.
-4. Kaynak ve koşul açıklamalarını gözden geçirdikten sonra `v0.1.1` etiketi
-   oluşturun. Etiket uygulama ve proje sürümüyle eşleşmelidir.
-5. Etiket, testleri tekrar çalıştırır; ardından **Publish container** iş akışı
-   `linux/amd64` ve `linux/arm64` imajlarını GHCR'a gönderir.
-   Bu paket `latest` etiketi üretmez. Tam sürüm etiketi kullanın.
-6. GitHub Packages içinde oluşan imajın görünürlüğünü **Public** yapın ve
-   oturumsuz pull işlemini doğrulayın. Public depo imaj görünürlüğünü tek başına
-   garanti etmez.
-7. GitHub Release'i erken beta / pre-release olarak sunun; kaynak ZIP'i ve
-   SHA-256 dosyasını isteğe bağlı ekleyin. ARM64 build, gerçek cihaz testi
-   olarak tanıtılmamalıdır.
+1. Uygulama, proje, Compose/env varsayılanları ve `uv.lock` sürümlerini
+   uyumlu güncelleyin; testleri ve kaynak erişim/koşul incelemesini tamamlayın.
+2. Değişiklikleri yükleyip GitHub Actions **Tests** sonucunun başarılı
+   olmasını bekleyin.
+3. Yeni uygulama sürümüyle eşleşen, başında `v` olan yeni etiket oluşturun.
+   Mevcut `v0.1.1` etiketini başka commit'e taşımayın.
+4. Etiket testleri tekrar çalıştırır; **Publish container** amd64 ve arm64
+   imajlarını GHCR'a gönderir. Tam sürüm imaj etiketini kullanın;
+   bu iş akışı `latest` etiketi üretmez.
+5. Paket görünürlüğünü ve oturumsuz indirmeyi kontrol edin.
+   Public depo, paket görünürlüğünü tek başına garanti etmez.
+6. Release notlarını test kapsamı ve bilinen sınırlarla yazın.
+   Erken beta sürümünü Pre-release olarak işaretleyin.
+   ARM64 build/indirme, fiziksel cihaz çalışma testi olarak sunulmamalıdır.
+7. İsteğe bağlı kaynak ZIP'i ve SHA-256 dosyasını Release'e ekleyin.
+   Kurulum belgelerini ve manifesti birlikte güncelleyin.
 
-İş akışı otomatik verilen `GITHUB_TOKEN` ile çalışır; depoya kişisel erişim
+İş akışı otomatik `GITHUB_TOKEN` ile çalışır; depoya kişisel erişim
 tokenı eklemek gerekmez. `packages: write` yalnız yayın işine verilmiştir.
-Etiket yüklemek yayın işlemini tetiklediğinden, kaynak yüklemesinden ayrı bir adımdır.
+Başka hesaba fork edilirse GHCR adresi o hesabın/deponun adıyla oluşur;
+yukarıdaki adres bu projeye aittir.
 
-İmaj gerçekten yayımlandıktan sonra, kendi hesabınız/deponuzla şu **şablonu**
-`PROVIDER_IMAGE` olarak kullanabilirsiniz:
+BookOrbit resmi sağlayıcı kataloğuna ekleme ayrı bir katkıdır.
+Bu yayın işlemi kataloğa otomatik kayıt oluşturmaz.
 
-```text
-ghcr.io/<owner>/<repository>:0.1.1
-```
-
-Bu bir doğrulanmış mevcut imaj adresi değildir. Hazır imajla kurulumda önce
-`docker compose pull`, sonra `docker compose up -d --no-build` kullanın.
-Yerel derleme için `PROVIDER_IMAGE` boş ve `up -d --build` yeterlidir.
-
-BookOrbit resmi sağlayıcı kataloğuna ekleme daha sonra ayrı bir katkı olabilir;
-önce herkese açık imaj, belgeler ve kullanılabilirlik doğrulanmalıdır.
 Kaynaklar:
 [BookOrbit yayın rehberi](https://github.com/bookorbit/bookorbit/blob/54cba36e0914f307e2c9d82571d04e626f1586e1/docs/BUILDING_METADATA_PROVIDERS.md),
-[GitHub container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
+[GitHub Container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
 [GitHub Actions ile imaj yayını](https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images).

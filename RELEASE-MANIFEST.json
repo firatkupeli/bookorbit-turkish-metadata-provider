@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "sha256": "b705cece66c5e8e3e4714532355d33642f013fb381b8a467882b5d1544888799",
-      "bytes": 3693
+      "sha256": "359c906ff53ba17105f7b41942d58e740e2b85e79226abae3d0c7c404b910c0c",
+      "bytes": 4781
     },
     {
       "path": "README.md",
-      "sha256": "c6b6f61d5dcbc01339014f3ac9842c1dba05c6e4d98e6b143740fbf7db3daf14",
-      "bytes": 7946
+      "sha256": "bf465d63c1c712f3a8d0ded3112132bcfcedfa367e41ab5639ffcd840fa3c7e8",
+      "bytes": 8826
     },
     {
       "path": "SECURITY.md",
@@ -154,13 +154,13 @@
     },
     {
       "path": "docs/PUBLISHING.md",
-      "sha256": "7b6b18e2f761009c85cb6fe1053c5fac5a9d42873e06a16fe0b137f868f24552",
-      "bytes": 3430
+      "sha256": "42319a6a6e2aa6134a9e41c9414c4b837ad972d3b62b0697afa482e2c3b531c9",
+      "bytes": 3885
     },
     {
       "path": "docs/RELEASE-CHECKS.md",
-      "sha256": "16143f3cac9c6f284fc6d8a1c81649ad97d45554d07ee1d21962ea43a973e7e7",
-      "bytes": 2322
+      "sha256": "ce06b40c55ea7628adc3b21f69262bbf957b781508ae41e26cefb8132bce0484",
+      "bytes": 3471
     },
     {
       "path": "docs/SOURCE_ACCESS.md",
@@ -169,13 +169,13 @@
     },
     {
       "path": "docs/SYNOLOGY.md",
-      "sha256": "8cd1e986d6db6603d3f65ffed63ab0b7d79168f81ec7045bd45c09f732195063",
-      "bytes": 5594
+      "sha256": "68f11cbac34050236866b6c65dc9d095279994cd83e8d7c9c56897acaccc1e35",
+      "bytes": 6793
     },
     {
       "path": "docs/VERIFICATION.md",
-      "sha256": "2d12e523ef14b6675e143d1de18022d07df0d6f248c615b80bcadb604b06d12a",
-      "bytes": 4362
+      "sha256": "8b42e02d80b07d6768aee7dc00f7082f7b596ef3c3b91d8297b5e13d6dfd2c67",
+      "bytes": 5435
     },
     {
       "path": "docs/conformance-0.1.1.txt",
@@ -201,6 +201,11 @@
       "path": "docs/live-verification.json",
       "sha256": "082daf979821c61164d8f7a41e2cd33078585d4b7c3e619e684be3659934364a",
       "bytes": 1620
+    },
+    {
+      "path": "docs/public-pull-verification-0.1.1.json",
+      "sha256": "b86911000bcdac430e023ff728cb4f5cc68e97349304564aca97d8be1a711d00",
+      "bytes": 684
     },
     {
       "path": "main.py",

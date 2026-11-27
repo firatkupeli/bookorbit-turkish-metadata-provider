@@ -59,7 +59,33 @@ BookOrbit'te birkaç kitapta elle arama doğru göründü. Tek kitapta Field Rul
 üzerinden Auto-fill çalıştı; açıklama ve yayınevi doğrulanıp kaydedildi.
 Bu, sınırlı kullanıcı kabul testidir; kütüphane çapında regresyon testi değildir.
 
-Bu çalışma bilgisayarında Docker Engine yoktur. Yeni GitHub Actions dosyası
-CI üzerinde Docker build ve salt okunur konteyner sağlık testini çalıştırmak
-üzere hazırlanmıştır; GitHub'a yüklenmediği için henüz orada çalışmamıştır.
-Çok mimarili imaj yayını yapılandırılmıştır; ARM64 çalışma testi yapılmamıştır.
+## GitHub CI ve herkese açık imaj
+
+[Tests çalışması](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46026742807)
+ve [v0.1.1 yayın çalışması](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46027864425)
+başarılı tamamlandı. Yayındaki `verify / test` işi Ruff, çevrimdışı testler,
+resmi conformance aracı, Docker build ve salt okunur konteyner kontrollerini geçti.
+Bu CI testi gerçek Kitapyurdu erişimine bağlı değildir.
+
+Herkese açık imaj:
+
+```text
+ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+```
+
+`linux/amd64` ve `linux/arm64` manifestleri ile bütün katmanları, kullanıcı adı,
+kişisel erişim anahtarı, Docker oturumu veya tarayıcı oturumu kullanmadan
+GHCR Registry API üzerinden indirildi. Manifest/katman SHA-256 özetleri doğrulandı.
+Toplam 19 benzersiz blob ve 103655581 bayt doğrulandı.
+[Makinece okunabilir test kaydı](public-pull-verification-0.1.1.json).
+
+Çok mimarili imajın index özeti:
+
+```text
+sha256:61c611164a951ebd879989dafa2c43576daf5b14baf13a5d3f3b8a01fbc00fb1
+```
+
+Bu indirme testi, yayımlanan imajın çalıştırılması anlamına gelmez.
+amd64 Docker çalışma kontrolleri GitHub CI'da geçti; NAS/BookOrbit denemesi
+yukarıda ayrı kayıtlıdır. ARM64 fiziksel cihazda çalışma testi yapılmamıştır.
+Bu çalışma bilgisayarında Docker Engine bulunmamaktadır.

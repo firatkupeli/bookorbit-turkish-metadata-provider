@@ -31,8 +31,21 @@ sabit adres kullanmak mümkündür; adres yine ağın alt ağında olmalıdır.
 3. `BOOKORBIT_NETWORK` değerine gerçek mevcut ağ adını yazın.
 4. Macvlan kullanıyorsanız `PROVIDER_IPV4_ADDRESS` alanına kendi boş IP'nizi girin.
    Bu alan ile ağ adı boşsa Compose bilerek hata verir.
-5. `PROVIDER_IMAGE` boş kalabilir. İsteğe bağlı `AUTH_TOKEN` ayarlayın;
-   boş bıraktığınızda BookOrbit Authorization alanı da boş olmalıdır.
+5. Hazır imaj için `.env` içindeki `PROVIDER_IMAGE` satırını ayarlayın:
+
+   ```dotenv
+   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+   ```
+
+6. Container Manager GUI'sinde hazır imajın kullanılmasını sağlamak için
+   NAS'taki kurulum kopyasının YAML dosyasında `turkish-metadata` servisi
+   altındaki `build:` bölümünü ve ona bağlı girintili `context:` /
+   varsa `dockerfile:` satırlarını kaldırın. `image:`, `environment:`,
+   güvenlik ve ağ ayarlarını koruyun. Böylece GUI kaynak kod derlemek
+   yerine GHCR imajını kullanır. Kaynaktan derleme istiyorsanız `build`
+   bölümünü koruyun ve `PROVIDER_IMAGE` değerini boş bırakın.
+7. İsteğe bağlı `AUTH_TOKEN` ayarlayın; boş bıraktığınızda BookOrbit
+   Authorization alanı da boş olmalıdır.
 
 GUI'de yanlış Compose dosyasının seçilmesini önlemek için NAS'taki **kurulum
 kopyasında** yalnız seçtiğiniz YAML dosyasını tutun ve onu `docker-compose.yml`
@@ -46,19 +59,24 @@ Geliştirme ortamı `.venv`, eski ZIP'ler ve gerçek env dosyaları GitHub'a yü
    klasörü seçin. Mevcut `docker-compose.yml` dosyasını kullanın.
 3. **İleri**. Web Station web portalı seçeneğini kapalı bırakın.
 4. Özette **Oluşturduktan sonra projeyi başlatın** seçili olabilir. **Bitti**.
-5. Derleme günlüğünde başarılı etiketleme ve **Exit Code: 0** görünmesini bekleyin.
-   Projenin ve konteynerin çalıştığını, sağlık durumunun sağlıklı olduğunu kontrol edin.
+5. Hazır imaj kurulumunda indirme/oluşturma işleminin tamamlanmasını ve
+   **Exit Code: 0** görünmesini bekleyin. Kaynaktan kurulumda ayrıca derleme
+   adımları görünür. Konteynerin çalıştığını ve sağlık durumunu kontrol edin.
+   Public GHCR imajını indirmek için GitHub hesabı veya token gerekmez.
 
-SSH ile eşdeğeri (seçilen YAML'nin adını kullanın):
+SSH ile hazır imaj kurulumu (seçilen YAML'nin adını kullanın):
 
 ```sh
 docker compose -f compose.synology.yaml config --quiet
-docker compose -f compose.synology.yaml up -d --build
+docker compose -f compose.synology.yaml pull
+docker compose -f compose.synology.yaml up -d --no-build
 docker compose -f compose.synology.yaml ps
 ```
 
 Ortak ağ için komuttaki dosya `compose.yaml` olur. GUI kopyasında dosyayı
-yeniden adlandırdıysanız komutlarda da o adı kullanın.
+yeniden adlandırdıysanız komutlarda da o adı kullanın. SSH üzerinden
+`--no-build` derlemeyi kapatır; yukarıdaki YAML `build` kaldırma adımı
+özellikle GUI kurulumunu açık hâle getirir.
 
 ## 4. BookOrbit'e bağlayın
 
@@ -81,11 +99,15 @@ ayarlarını uygulayıp tek kitapta Auto-fill deneyin ve sonucu inceleyerek kayd
 
 ## Güncelleme ve sorun giderme
 
-Dosyaları değiştirdiğinizde yalnız yeniden başlatmak eski imajı kullanabilir.
-Projeyi durdurup Container Manager'ın yeniden derleme/oluşturma işlemiyle
-**build** çalıştırın; arayüzdeki seçenek adı DSM sürümüne göre değişebilir.
-Alternatif olarak aynı klasörde yukarıdaki `up -d --build` komutunu kullanın.
-Proje silme işlemiyle kaynak klasörünü silmeyin; BookOrbit projesini değiştirmeyin.
+Yeni hazır sürüm için `PROVIDER_IMAGE` etiketini o yayımlanmış sürüme
+güncelleyin, imajı yeniden indirin ve sağlayıcı konteynerini yeniden oluşturun.
+SSH üzerinden yukarıdaki `pull` ve `up -d --no-build` komutları kullanılabilir.
+Yalnız yeniden başlatmak başka bir imaja geçiş yapmaz.
+
+Kaynak koddan derlemede `build` bölümünü koruyun, `PROVIDER_IMAGE` değerini
+boş bırakın ve `up -d --build` kullanın. Container Manager'da işlem adları
+DSM sürümüne göre değişebilir. BookOrbit projesini değiştirmeyin;
+sağlayıcıyı güncellemek için kaynak klasörünü silmeniz gerekmez.
 
 - `NanoCPUs / CPU CFS` hatası: yerel eski YAML'deki `cpus` ayarını kaldırın.
   Bu pakette böyle bir ayar yoktur.
