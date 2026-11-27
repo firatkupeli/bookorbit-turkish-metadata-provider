@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-27",
+  "environment": "Windows Python 3.12; Uvicorn loopback; real Kitapyurdu source",
+  "checks": [
+    {
+      "mode": "title",
+      "status": 200,
+      "seconds": 1.031,
+      "providerIds": [
+        "kitapyurdu:51855"
+      ],
+      "partial": false,
+      "error": null
+    },
+    {
+      "mode": "author",
+      "status": 200,
+      "seconds": 1.516,
+      "providerIds": [
+        "kitapyurdu:51855"
+      ],
+      "partial": false,
+      "error": null
+    },
+    {
+      "mode": "isbn-only",
+      "status": 200,
+      "seconds": 1.844,
+      "providerIds": [],
+      "partial": false,
+      "error": null
+    },
+    {
+      "mode": "lookup",
+      "status": 200,
+      "fields_present": [
+        "authors",
+        "cover",
+        "description",
+        "isbn13",
+        "languageCode",
+        "mediaType",
+        "pages",
+        "providerId",
+        "publishedDate",
+        "publishedYear",
+        "publisher",
+        "title",
+        "translators",
+        "url"
+      ],
+      "isbn13": "9786052957929",
+      "pages": 171,
+      "translators": [
+        "Aziz Üstel"
+      ],
+      "publishedDate": "2019-09-10"
+    },
+    {
+      "mode": "observed-cover-url",
+      "status": 200,
+      "content_type": "image/jpeg",
+      "bytes": 35112
+    }
+  ],
+  "initial_checks_note": "Initial checks before cache-based ISBN resolution was added; cold upstream ISBN-only limitation remains.",
+  "final_code_checks": [
+    {
+      "mode": "final-code-warm-isbn-only",
+      "status": 200,
+      "providerIds": [
+        "kitapyurdu:51855"
+      ],
+      "partial": false
+    }
+  ]
+}

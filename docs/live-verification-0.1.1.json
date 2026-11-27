@@ -1,0 +1,51 @@
+{
+  "version": "0.1.1",
+  "date": "2026-11-27",
+  "environment": "Local Uvicorn; real Kitapyurdu source; first query with empty provider cache",
+  "checks": [
+    {
+      "case": "cold-isbn-title-author",
+      "status": 200,
+      "seconds": 9.297,
+      "partial": false,
+      "error": null,
+      "books": [
+        {
+          "providerId": "kitapyurdu:711075",
+          "title": "Şehit!",
+          "authors": [
+            "Kaveh Akbar"
+          ],
+          "publisher": "HOLDEN KİTAP",
+          "isbn13": "9786255539007",
+          "pages": 424,
+          "translators": [
+            "Berkan M. Şimşek"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "title-author",
+      "status": 200,
+      "seconds": 1.282,
+      "partial": false,
+      "error": null,
+      "books": [
+        {
+          "providerId": "kitapyurdu:711075",
+          "title": "Şehit!",
+          "authors": [
+            "Kaveh Akbar"
+          ],
+          "publisher": "HOLDEN KİTAP",
+          "isbn13": "9786255539007",
+          "pages": 424,
+          "translators": [
+            "Berkan M. Şimşek"
+          ]
+        }
+      ]
+    }
+  ]
+}
