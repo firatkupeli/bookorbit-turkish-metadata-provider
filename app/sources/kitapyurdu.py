@@ -237,7 +237,8 @@ def parse_book(html: str, source_id: str) -> Book:
         image = image[0] if image else None
     if isinstance(image, dict):
         image = image.get("url")
-    cover = image_url(str(cover_link["href"]) if cover_link else image)
+    # Observed JSON-LD covers are larger than the popup's height-limited variant.
+    cover = image_url(image) or (image_url(str(cover_link["href"])) if cover_link else None)
     description = data.get("description")
     if not description:
         desc_tag = soup.select_one(".ky-pd-description, .info__text")
@@ -327,7 +328,7 @@ class KitapyurduSource:
                         try:
                             book = await self.lookup(source_id)
                         except ProviderError as error:
-                            first_error = first_error or error
+                            first_error = error if error.status == 429 else first_error or error
                             partial = True
                             if error.status == 429:
                                 raise
@@ -339,7 +340,7 @@ class KitapyurduSource:
                     if matches or fetched >= detail_budget:
                         break
         except ProviderError as error:
-            first_error = first_error or error
+            first_error = error if error.status == 429 else first_error or error
             partial = True
         except TimeoutError:
             partial = True

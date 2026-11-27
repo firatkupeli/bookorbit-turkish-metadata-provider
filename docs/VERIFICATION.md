@@ -1,5 +1,9 @@
 # Doğrulama kaydı
 
+> 0.1.2 adayı için güncel 92 test, API ve canlı süreç kayıtları:
+> [İnceleme denetimi](REVIEW-AUDIT-0.1.2.md). Aşağıdaki bölüm yayımlanmış
+> 0.1.1 sürümünün tarihsel doğrulamasıdır.
+
 Tarih: **27 Kasım 2026**. Sürüm: **0.1.1 / erken beta**.
 Resmi API gereksinimleri uygulama geliştirilmeden önce incelendi.
 

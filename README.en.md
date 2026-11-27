@@ -2,6 +2,11 @@
 
 [Türkçe kurulum ve Field Rules rehberi](README.md)
 
+> **0.1.2 release candidate:** ISBN validation/fallback, error priority and cover
+> selection fixes are prepared but have not been published to GHCR.
+> See the [review audit](docs/REVIEW-AUDIT-0.1.2.md). The published image below
+> remains 0.1.1 until the new release has been built and verified.
+
 An independent Python 3.12 / FastAPI external metadata provider for BookOrbit.
 The first source is Kitapyurdu. The source adapter interface supports adding
 other Turkish sources later.
@@ -87,7 +92,10 @@ are not advertised.
 Search accepts title, author and ISBN. Supplied ISBNs require an exact match.
 Without ISBN, known different authors are excluded before and after detail
 lookup. The source's ISBN index is incomplete: send title and author alongside
-ISBN for a cold cache. Missing data is omitted, never fabricated.
+ISBN for a cold cache. An invalid ISBN falls back to supplied title/author text;
+invalid ISBN-only requests return 400. Without ISBN, author aliases in another
+language may not match; use a validated ISBN in that case. Missing data is
+omitted, never fabricated.
 
 For automatic metadata, add the provider first in **Field Rules** for supported
 fields. Start with **Fill gaps** to preserve existing values. For Description,

@@ -37,7 +37,7 @@ class ProviderService:
                     result.matches.extend(answer.matches)
                     result.partial |= answer.partial
                 except ProviderError as error:
-                    first_error = first_error or error
+                    first_error = error if error.status == 429 else first_error or error
                     result.partial = True
             if not result.matches and first_error:
                 raise first_error

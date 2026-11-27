@@ -1,6 +1,6 @@
 {
   "project": "bookorbit-turkish-metadata-provider",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "files": [
     {
       "path": ".dockerignore",
@@ -9,12 +9,12 @@
     },
     {
       "path": ".env.example",
-      "sha256": "2d2fdd69b6c9ce421137260f554931e4065922e22134f089fb049bb02dd884e4",
+      "sha256": "80481296fdb909f3413ec7851f4413824f12ded327d17decfcd82a20eccb98d0",
       "bytes": 565
     },
     {
       "path": ".env.synology.example",
-      "sha256": "05fa3b64f172c032cb57428a4acc749c44d0891399d511769da89a902e9f72b2",
+      "sha256": "fca15063a0a149f2b9b737f6019524dd3a0d3a08ca43505f4b3bc16793446ba6",
       "bytes": 513
     },
     {
@@ -44,8 +44,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "58b384e395f97f0d704d4686951a38a135999179eb070b87fb5a8de1b3347569",
-      "bytes": 1993
+      "sha256": "c52e7ef32b4b67003fc5454384029964ed154d980de82e21b26e4c7fffc8205d",
+      "bytes": 2837
     },
     {
       "path": "CONTRIBUTING.md",
@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "sha256": "359c906ff53ba17105f7b41942d58e740e2b85e79226abae3d0c7c404b910c0c",
-      "bytes": 4781
+      "sha256": "74086a8af715a923addc5c38f0592e3ef110eabe684dc0948f1ec680e632cc1e",
+      "bytes": 5275
     },
     {
       "path": "README.md",
-      "sha256": "bf465d63c1c712f3a8d0ded3112132bcfcedfa367e41ab5639ffcd840fa3c7e8",
-      "bytes": 8826
+      "sha256": "c8946f448ef14d3106bd153b11b55741b1a19506f19b92ceb2ed54547d2d22ac",
+      "bytes": 9403
     },
     {
       "path": "SECURITY.md",
@@ -84,13 +84,13 @@
     },
     {
       "path": "app/__init__.py",
-      "sha256": "ae739b3e3b817044ada923b44ba82c752fe8b7c2133908d58fff8fd4b5146298",
+      "sha256": "62fb98cd69cab6a05bf88a86f0702efa7848600b208fd56673f6fda3bbcefa3b",
       "bytes": 22
     },
     {
       "path": "app/api.py",
-      "sha256": "36c273ee11303abf8148b85705a5d728f6e15ea7af56c9d0845e6383e20a3969",
-      "bytes": 5648
+      "sha256": "4c77611ad7efdf1b5f4fddf1a58528a352a8fe717f4d482f4bfd266e7dc592a4",
+      "bytes": 5749
     },
     {
       "path": "app/cache.py",
@@ -119,8 +119,8 @@
     },
     {
       "path": "app/service.py",
-      "sha256": "c2cc68166280e0927d87c941070e2a273dbb9291296c6dbc3b654bfd8cba499e",
-      "bytes": 3080
+      "sha256": "df0b7eef7e0676c47e9d95e91f33eff82d73920c6b55fda2dd987b422c3f5c11",
+      "bytes": 3114
     },
     {
       "path": "app/sources/__init__.py",
@@ -134,33 +134,38 @@
     },
     {
       "path": "app/sources/kitapyurdu.py",
-      "sha256": "212c37cd604211091662aadc80071c534132410bdf3b29fe8fedcf04b4c65749",
-      "bytes": 13776
+      "sha256": "11a94493124f3a36db7716fc9e72a73b46bb8b86c12d5f8f494a6dc1282f1d03",
+      "bytes": 13947
     },
     {
       "path": "app/text.py",
-      "sha256": "eae8be05f5663a172efdb04169bc4b3440016ca326eae319b9ee4329d0ef7d31",
-      "bytes": 2366
+      "sha256": "ec7a507a22744b0f4fd899ab4c84a7a63860e92c5634c70a116da371e363e393",
+      "bytes": 2502
     },
     {
       "path": "compose.synology.yaml",
-      "sha256": "424c11056697f52b166a06bdea719467c30009e1b7718f694935dd39be9d6985",
+      "sha256": "3f96caee6d1e9d3e8def044297168b83549db20d755404f1a89d76afb5f35234",
       "bytes": 1327
     },
     {
       "path": "compose.yaml",
-      "sha256": "db66472b49cb89ea8acabde2778b18f4070ae6cec02f578e535a25af6b584b34",
+      "sha256": "be89c1d7524f712fbd9f7f7cbbb1f0c5a42050863150a574b1137164637f164f",
       "bytes": 1151
     },
     {
       "path": "docs/PUBLISHING.md",
-      "sha256": "42319a6a6e2aa6134a9e41c9414c4b837ad972d3b62b0697afa482e2c3b531c9",
-      "bytes": 3885
+      "sha256": "860196d67e277154dbdc9ff47be57ff790ca18392f79ae96c7d641ecdf9a565a",
+      "bytes": 4093
     },
     {
       "path": "docs/RELEASE-CHECKS.md",
-      "sha256": "ce06b40c55ea7628adc3b21f69262bbf957b781508ae41e26cefb8132bce0484",
-      "bytes": 3471
+      "sha256": "e30b5335b539820f93acf957b4df3623c3bc0fed22f27c7e6118ced3c3c5e26f",
+      "bytes": 3609
+    },
+    {
+      "path": "docs/REVIEW-AUDIT-0.1.2.md",
+      "sha256": "fdecaafd1ce0372e4f6ff080ec4afa17c61f7f622ae241cce8798fd36772722e",
+      "bytes": 5379
     },
     {
       "path": "docs/SOURCE_ACCESS.md",
@@ -174,8 +179,8 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "sha256": "8b42e02d80b07d6768aee7dc00f7082f7b596ef3c3b91d8297b5e13d6dfd2c67",
-      "bytes": 5435
+      "sha256": "7375ff4f9374a895f594a47fd601bdadb1552885350ceb8cc05dd39342cfc0ce",
+      "bytes": 5642
     },
     {
       "path": "docs/conformance-0.1.1.txt",
@@ -193,9 +198,19 @@
       "bytes": 287
     },
     {
+      "path": "docs/conformance-offline-0.1.2.txt",
+      "sha256": "10c7334a8a17bee16dec07b6df63f3c136a7578a7ca675ec08ab6a1e9c29754d",
+      "bytes": 287
+    },
+    {
       "path": "docs/live-verification-0.1.1.json",
       "sha256": "dbd242c4a79282512cfc7900655560611c442de407984270b6262ecc087b064c",
       "bytes": 1150
+    },
+    {
+      "path": "docs/live-verification-0.1.2.json",
+      "sha256": "e73cc010db7751a3bed0501f5597df4bbc2089a2e6632af34f80f27c51dcfdff",
+      "bytes": 1446
     },
     {
       "path": "docs/live-verification.json",
@@ -214,7 +229,7 @@
     },
     {
       "path": "pyproject.toml",
-      "sha256": "8cb041ecc4e93fc8c5e974c0bce32afe1a234b42408ed2af8ac48752643fb2dc",
+      "sha256": "381fa921233d85e4fa53bbb4d843c32560f409321c65e04edc5dabf744b5192f",
       "bytes": 715
     },
     {
@@ -288,6 +303,11 @@
       "bytes": 1847
     },
     {
+      "path": "tests/test_review_regressions.py",
+      "sha256": "07c85efdfb7f492230879387e18a2187a8354440b2e28f453c0cb63caf2e2525",
+      "bytes": 7771
+    },
+    {
       "path": "tests/test_search_identity.py",
       "sha256": "09085b24a0bd151355d6811d5d17f501f9613b25436bd067ac5d6a806b0177e2",
       "bytes": 5448
@@ -319,7 +339,7 @@
     },
     {
       "path": "uv.lock",
-      "sha256": "1895187eedb183e230343036dc2c5414a465bf80b159e1491b80e29b1608e716",
+      "sha256": "6d1c7fc6463cfed0c0b237e7fdd970f14db98a6451398e4841ff687541f5ef7d",
       "bytes": 79498
     }
   ]

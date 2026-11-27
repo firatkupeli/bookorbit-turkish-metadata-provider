@@ -1,5 +1,9 @@
 # GitHub yayını ve sonraki sürümler
 
+> 0.1.2 kaynak adayı hazır; henüz GHCR'da yayımlanmış değildir.
+> [Denetim ve yayın sırası](REVIEW-AUDIT-0.1.2.md). Aşağıdaki mevcut imaj
+> adresi halen yayımlanmış 0.1.1 sürümüne aittir.
+
 ## Yayımlanmış sürüm
 
 - [Kaynak depo](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider)

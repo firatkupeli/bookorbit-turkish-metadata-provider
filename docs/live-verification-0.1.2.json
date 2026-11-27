@@ -1,0 +1,55 @@
+{
+  "version": "0.1.2",
+  "runtime": "local Uvicorn source processes; not a Docker image",
+  "checks": [
+    {
+      "check": "cold_title_author_isbn",
+      "status": 200,
+      "duration_seconds": 9.453,
+      "partial": false,
+      "book": {
+        "providerId": "kitapyurdu:711075",
+        "title": "Şehit!",
+        "mediaType": "book",
+        "authors": [
+          "Kaveh Akbar"
+        ],
+        "cover": "https://img.kitapyurdu.com/v1/getImage/fn:12023903/wi:800/wh:4b8fc61ef",
+        "publisher": "HOLDEN KİTAP",
+        "publishedYear": "2025",
+        "publishedDate": "2025-02-27",
+        "pages": 424,
+        "languageCode": "tr",
+        "isbn13": "9786255539007",
+        "url": "https://www.kitapyurdu.com/kitap/sehit/711075.html",
+        "translators": [
+          "Berkan M. Şimşek"
+        ]
+      },
+      "description_characters": 862,
+      "description_is_plain_text": true
+    },
+    {
+      "check": "lookup_first_after_process_restart",
+      "status": 200,
+      "duration_seconds": 6.078,
+      "providerId": "kitapyurdu:711075",
+      "title": "Şehit!"
+    },
+    {
+      "check": "invalid_isbn_text_fallback",
+      "status": 200,
+      "duration_seconds": 0.64,
+      "providerId": "kitapyurdu:711075",
+      "isbn13": "9786255539007"
+    },
+    {
+      "check": "invalid_isbn_only",
+      "status": 400,
+      "response": {
+        "error": "invalid_isbn"
+      }
+    }
+  ],
+  "result": "success"
+}

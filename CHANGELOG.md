@@ -1,5 +1,18 @@
 # Sürüm notları
 
+## 0.1.2 — Yayımlanmamış aday
+
+- `0000000000` ISBN-10 yer tutucusu ve ASCII dışı ISBN rakamları reddedilir;
+  kaynaktaki yer tutucu ISBN artık ISBN-13'e dönüştürülmez.
+- Geçersiz ISBN yanında başlık/yazar varsa metin aramasına devam edilir.
+  Yalnız geçersiz ISBN için 400 korunur; geçerli ISBN tam eşleşme şartı değişmez.
+- Önceki 502 hatası, daha sonra gelen 429 ve `Retry-After` bilgisini gizlemez.
+- Sayfada gerçekten bulunan daha büyük JSON-LD kapak URL'si önceliklendirilir;
+  eksik/güvenilmeyen bağlantıda doğrulanmış kaynak popup URL'sine dönülür.
+- Yeniden başlatma sonrası ilk işlem olarak kalıcı kimlikle lookup dahil
+  19 yeni regresyon testi eklendi. Sağlayıcı anahtarı ve kimlik biçimi korunur.
+- Denetim ayrıntıları: [REVIEW-AUDIT-0.1.2.md](docs/REVIEW-AUDIT-0.1.2.md).
+
 ## 0.1.1 — 2026-11-27
 
 - `Şehit! / Kaveh Akbar` aramasında farklı yazarlara ait kitapların dönmesi düzeltildi.

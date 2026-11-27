@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ${PROVIDER_IMAGE:-bookorbit-turkish-metadata-provider:0.1.1}
+    image: ${PROVIDER_IMAGE:-bookorbit-turkish-metadata-provider:0.1.2}
     platform: linux/amd64
     restart: unless-stopped
     init: true
@@ -18,7 +18,7 @@ services:
     mem_limit: 256m
     environment:
       AUTH_TOKEN: ${AUTH_TOKEN:-}
-      USER_AGENT: ${USER_AGENT:-BookOrbitTurkishMetadata/0.1.1}
+      USER_AGENT: ${USER_AGENT:-BookOrbitTurkishMetadata/0.1.2}
       SOURCE_INTERVAL_SECONDS: ${SOURCE_INTERVAL_SECONDS:-2}
       REQUEST_TIMEOUT_SECONDS: ${REQUEST_TIMEOUT_SECONDS:-5}
       DEADLINE_SECONDS: ${DEADLINE_SECONDS:-12}

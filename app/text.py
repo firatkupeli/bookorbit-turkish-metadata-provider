@@ -52,10 +52,13 @@ def match_title(value: str) -> str:
 
 def normalize_isbn(value: str) -> str | None:
     value = re.sub(r"[\s\-]", "", value).upper()
-    if re.fullmatch(r"\d{13}", value) and value.startswith(("978", "979")):
+    # An all-zero ISBN-10 passes the arithmetic checksum but is a placeholder.
+    if value == "0000000000":
+        return None
+    if re.fullmatch(r"[0-9]{13}", value) and value.startswith(("978", "979")):
         if sum(int(c) * (1 if i % 2 == 0 else 3) for i, c in enumerate(value)) % 10 == 0:
             return value
-    if re.fullmatch(r"\d{9}[\dX]", value):
+    if re.fullmatch(r"[0-9]{9}[0-9X]", value):
         if sum((10 - i) * (10 if c == "X" else int(c)) for i, c in enumerate(value)) % 11 == 0:
             return value
     return None

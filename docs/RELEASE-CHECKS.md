@@ -1,5 +1,8 @@
 # 0.1.1 kaynak yayın paketi denetimleri
 
+> Bu dosya 0.1.1 yayınını kaydeder. Yayımlanmamış 0.1.2 adayının
+> [ayrı denetim kaydı](REVIEW-AUDIT-0.1.2.md) bulunmaktadır.
+
 27 Kasım 2026. Yerel kaynak paketinin hazırlanması, GitHub CI ve herkese açık
 imaj yayınına ait sonuçlar birlikte kaydedilmiştir.
 

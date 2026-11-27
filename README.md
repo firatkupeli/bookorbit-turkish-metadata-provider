@@ -2,11 +2,16 @@
 
 [English](README.en.md)
 
+> **Yayıma hazırlanan sürüm: 0.1.2.** İnceleme sonrası ISBN, hata önceliği ve
+> kapak seçimi düzeltmeleri hazırlandı; henüz GHCR'a yayımlanmadı.
+> [Denetim ve test sonuçları](docs/REVIEW-AUDIT-0.1.2.md). Aşağıdaki hazır imaj
+> adresi halen yayımlanmış 0.1.1 sürümüne aittir.
+
 BookOrbit için Python 3.12 ve FastAPI ile geliştirilmiş, MIT lisanslı Türkçe
 metadata sağlayıcısı. İlk kaynak **Kitapyurdu**; yeni kaynaklar ayrı adaptörlerle
 eklenebilir. BookOrbit veya Kitapyurdu'nun resmi ürünü değildir.
 
-**Durum: 0.1.1 / erken beta.** Resmi BookOrbit uygunluk denetimi geçti.
+**Yayımlanmış sürüm: 0.1.1 / erken beta.** Resmi BookOrbit uygunluk denetimi geçti.
 Synology DS224+ üzerinde derleme, BookOrbit bağlantısı, elle arama ve tek kitapta
 Auto-fill akışı kullanıcı tarafından doğrulandı. Test kapsamı ve sınırlar:
 [doğrulama kaydı](docs/VERIFICATION.md), [sürüm notları](CHANGELOG.md).
@@ -47,6 +52,9 @@ döndürülür. ISBN'siz aramada bilinen farklı yazarlar elenir; başlık/yazar
 adayların sırasını belirler. Kaynağın indeksi bazı geçerli ISBN'lerde boş döner:
 soğuk önbellekte **ISBN ile birlikte başlık ve yazarı da gönderin**. İndeksin
 tamamı taranmaz; her sorgu için sonuç garantisi yoktur.
+Geçersiz ISBN yanında başlık veya yazar varsa metin araması yapılır; yalnızca
+geçersiz ISBN gönderilirse 400 döner. ISBN'siz aramada farklı dildeki yazar
+aliasları eşleşmeyebilir; bu durumda doğrulanmış ISBN kullanın.
 
 ## Docker ile kurulum
 
@@ -152,7 +160,7 @@ ile onaylayın. İlk denemeyi toplu kütüphane üzerinde yapmayın.
 | `PROVIDER_IPV4_ADDRESS` | Yalnız macvlan örneğinde zorunlu boş sabit IP |
 | `PROVIDER_IMAGE` | Boş: yerel `bookorbit-turkish-metadata-provider:0.1.1` etiketi |
 | `AUTH_TOKEN` | Boş: kimlik doğrulama yok; ayarlıysa Bearer gerekir |
-| `USER_AGENT` | `BookOrbitTurkishMetadata/0.1.1`; mümkünse işletici iletişimi ekleyin |
+| `USER_AGENT` | Kaynak adayı için `BookOrbitTurkishMetadata/0.1.2`; mümkünse işletici iletişimi ekleyin |
 | `SOURCE_INTERVAL_SECONDS` | 2; kaynak istekleri arasındaki en az süre |
 | `REQUEST_TIMEOUT_SECONDS` | 5; tek kaynak isteği süresi |
 | `DEADLINE_SECONDS` | 12; toplam arama bütçesi |

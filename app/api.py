@@ -122,8 +122,9 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
         mediaType: str = Query(default="book", pattern="^(book|audiobook|comic)$"),
     ):
         query, author, isbn = map(normalize_text, (query, author, isbn))
-        normalized_isbn = normalize_isbn(isbn) if isbn else normalize_isbn(query)
-        if isbn and not normalized_isbn:
+        normalized_isbn = normalize_isbn(isbn) or normalize_isbn(query)
+        # Bad embedded identifiers must not prevent an otherwise useful text search.
+        if isbn and not normalized_isbn and not (query or author):
             raise ProviderError("invalid_isbn", 400)
         if not (query or author or normalized_isbn):
             raise ProviderError("query_author_or_isbn_required", 400)
