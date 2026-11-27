@@ -1,24 +1,24 @@
 # GitHub yayını ve sonraki sürümler
 
-> 0.1.2 kaynak adayı hazır; henüz GHCR'da yayımlanmış değildir.
-> [Denetim ve yayın sırası](REVIEW-AUDIT-0.1.2.md). Aşağıdaki mevcut imaj
-> adresi halen yayımlanmış 0.1.1 sürümüne aittir.
+> **0.1.2 erken beta yayımlandı.** İki mimarinin katmanları oturumsuz
+> indirilip doğrulandı. [Güncel denetim](REVIEW-AUDIT-0.1.2.md).
 
 ## Yayımlanmış sürüm
 
 - [Kaynak depo](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider)
-- [v0.1.1 erken beta](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/releases/tag/v0.1.1)
+- [v0.1.2 erken beta](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/releases/tag/v0.1.2)
 - [Container paketi](https://github.com/users/firatkupeli/packages/container/bookorbit-turkish-metadata-provider)
-- [Başarılı yayın iş akışı](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46027864425)
+- [Başarılı yayın iş akışı](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46052947375)
 
 Herkese açık imajın `PROVIDER_IMAGE` değeri:
 
 ```dotenv
-PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
 ```
 
 amd64 ve arm64 imajları için oturumsuz indirme ve SHA-256 denetimi tamamlandı.
-[Doğrulama kaydı](VERIFICATION.md).
+[Doğrulama kaydı](REVIEW-AUDIT-0.1.2.md),
+[imaj indirme sonuçları](public-pull-verification-0.1.2.json).
 Hazır imaj kurulumunda `docker compose pull`, ardından
 `docker compose up -d --no-build` kullanın.
 Genel kurulum [Türkçe README](../README.md) ve [English README](../README.en.md)
@@ -51,7 +51,7 @@ manifest de birlikte yenilenmelidir.
 2. Değişiklikleri yükleyip GitHub Actions **Tests** sonucunun başarılı
    olmasını bekleyin.
 3. Yeni uygulama sürümüyle eşleşen, başında `v` olan yeni etiket oluşturun.
-   Mevcut `v0.1.1` etiketini başka commit'e taşımayın.
+   Mevcut sürüm etiketlerini başka commit'lere taşımayın.
 4. Etiket testleri tekrar çalıştırır; **Publish container** amd64 ve arm64
    imajlarını GHCR'a gönderir. Tam sürüm imaj etiketini kullanın;
    bu iş akışı `latest` etiketi üretmez.

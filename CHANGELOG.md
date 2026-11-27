@@ -1,6 +1,6 @@
 # Sürüm notları
 
-## 0.1.2 — Yayımlanmamış aday
+## 0.1.2 — 2026-11-27 / erken beta
 
 - `0000000000` ISBN-10 yer tutucusu ve ASCII dışı ISBN rakamları reddedilir;
   kaynaktaki yer tutucu ISBN artık ISBN-13'e dönüştürülmez.
@@ -11,6 +11,9 @@
   eksik/güvenilmeyen bağlantıda doğrulanmış kaynak popup URL'sine dönülür.
 - Yeniden başlatma sonrası ilk işlem olarak kalıcı kimlikle lookup dahil
   19 yeni regresyon testi eklendi. Sağlayıcı anahtarı ve kimlik biçimi korunur.
+- 92 otomatik test, resmi uygunluk denetimi ve Docker kontrolleri GitHub CI'da geçti.
+- amd64/arm64 hazır imajları yayımlandı; katmanları oturumsuz indirilip doğrulandı.
+- Kurucu, Synology DS224+ üzerinde 0.1.2 hazır imaj denemesini tamamladığını bildirdi.
 - Denetim ayrıntıları: [REVIEW-AUDIT-0.1.2.md](docs/REVIEW-AUDIT-0.1.2.md).
 
 ## 0.1.1 — 2026-11-27

@@ -2,21 +2,22 @@
 
 [Türkçe kurulum ve Field Rules rehberi](README.md)
 
-> **0.1.2 release candidate:** ISBN validation/fallback, error priority and cover
-> selection fixes are prepared but have not been published to GHCR.
-> See the [review audit](docs/REVIEW-AUDIT-0.1.2.md). The published image below
-> remains 0.1.1 until the new release has been built and verified.
+> **Published version: 0.1.2, early beta.** Includes ISBN validation/fallback,
+> error priority and cover selection fixes. Public amd64 and arm64 images are
+> available. See the [audit and publication checks](docs/REVIEW-AUDIT-0.1.2.md).
 
 An independent Python 3.12 / FastAPI external metadata provider for BookOrbit.
 The first source is Kitapyurdu. The source adapter interface supports adding
 other Turkish sources later.
 
-**Version 0.1.1, early beta.** Tested with the official BookOrbit conformance
-checker. Building and running on Synology DS224+, manual BookOrbit search and
-single-book Auto-fill were confirmed by the installer. This is limited testing,
-not a guarantee for every edition or library. GitHub CI passed the offline tests,
-official API conformance checker, Docker build and read-only container checks.
-See [verification](docs/VERIFICATION.md).
+**0.1.2 validation:** 92 automated tests, the official BookOrbit conformance
+checker, Docker build and read-only container checks passed in
+[GitHub CI](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46052947375). Both architectures' image layers were downloaded
+anonymously and verified with SHA-256. The installer reported completing a
+BookOrbit test with the published 0.1.2 image on Synology DS224+.
+This is limited testing, not a guarantee for every edition or library.
+See the [current audit](docs/REVIEW-AUDIT-0.1.2.md) and
+[historical 0.1.1 verification](docs/VERIFICATION.md).
 
 ## Source access and content rights
 
@@ -35,7 +36,7 @@ See [source access review](docs/SOURCE_ACCESS.md) and
 Docker Engine and Compose v2 are required. Public image:
 
 ```text
-ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
 ```
 
 Both `linux/amd64` and `linux/arm64` images are published. All image layers for
@@ -49,7 +50,7 @@ digests. Actual ARM hardware runtime testing has not been performed.
 4. Set `PROVIDER_IMAGE` in the same `.env` file:
 
    ```dotenv
-   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
    ```
 
 5. Run these commands in the project directory:

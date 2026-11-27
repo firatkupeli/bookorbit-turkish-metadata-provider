@@ -1,8 +1,8 @@
 # 0.1.2 inceleme denetimi
 
-Durum: **yayımlanmamış aday**. Bu dosya yerel doğrulama sonuçlarını kaydeder;
-0.1.2 imajının GHCR'da bulunduğu veya GitHub CI'nın bu sürümü çalıştırdığı
-iddia edilmez. Yayımlanmış 0.1.1 imajı ve katalog PR #11 değiştirilmedi.
+Durum: **0.1.2 erken beta yayımlandı — 27 Kasım 2026**.
+Bu dosya, yayın öncesi yerel doğrulamaları ve aşağıdaki yayın sonrası
+kontrolleri ayrı ayrı kaydeder. 0.1.1 sürümünün tarihsel kayıtları korunur.
 
 ## İncelemenin kaynağı
 
@@ -52,7 +52,8 @@ Bu gözlem bütün kitapların orijinal görsel kalitesi için garanti değildir
 - İlk 16 yeni senaryonun 10'u ve büyük kapak testi, ilgili düzeltmelerden
   önce hataları yeniden üretti.
 - Bir Starlette/httpx eskime uyarısı mevcut; test hatası değildir.
-- Yeni Docker imajı henüz oluşturulmadı; bu bilgisayarda Docker Engine yoktur.
+- Docker derlemesi ve salt okunur konteyner kontrolleri GitHub CI içinde geçti.
+  Yerel bilgisayarda Docker Engine kullanılmadı.
 - Gerçek ARM cihaz testi yapılmadı.
 - Kimlik anahtarı `turkish-metadata` ve eski kitap kimlikleri değişmedi.
 
@@ -68,11 +69,23 @@ Bu gözlem bütün kitapların orijinal görsel kalitesi için garanti değildir
 - Bunlar yeni kaynak kodun yerel Uvicorn süreçlerindeki kontrolleridir;
   yayımlanmış 0.1.2 Docker imajı/ARM cihaz testi olarak sunulmaz.
 
-## Yayın sırası
+## Yayın sonrası doğrulama
 
-1. Kaynak değişikliklerini kendi sağlayıcı deposuna yükleyin ve CI'yı bekleyin.
-2. CI geçince yeni `v0.1.2` erken beta sürümünü yayımlayın.
-3. GHCR 0.1.2 imajının iki mimarisini ve anonim indirmeyi doğrulayın.
-4. NAS'ta yayımlanmış hazır imaja geçip BookOrbit Test/Search fresh uygulayın.
-5. Mevcut katalog PR #11'in sürümünü ve test açıklamasını 0.1.2'ye güncelleyin.
-   Bu kayıt, henüz bulunmayan bir imaja yönlendirilmemelidir.
+- [v0.1.2 Pre-release](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/releases/tag/v0.1.2) yayımlandı.
+- [Publish container](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46052947375) içindeki `verify / test` ve `publish` işleri başarılı.
+  Yayımlanan kod revizyonu: `5f2ffc356137e3c5c10e1c6bdf8f12aa49d5243e`.
+- `ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2` herkese açıktır.
+  `latest` etiketi üretilmez; sürüm etiketi kullanılır.
+- [Oturumsuz indirme kaydı](public-pull-verification-0.1.2.json): amd64 ve arm64
+  için bütün katmanlar indirildi; 19 farklı blobun boyutu ve SHA-256 özeti doğrulandı.
+  Kullanıcı hesabı/PAT kullanılmadı; yalnız anonim GHCR pull tokenı kullanıldı.
+  Her iki imajın sürüm etiketi ve paketlenmiş uygulama sürümü `0.1.2`,
+  konteyner kullanıcısı `10001:10001` olarak kontrol edildi.
+- İmaj indeksi SHA-256:
+  `sha256:d0d1a8d5da2ac4e7751e7e258c189335a77a62b4dba8dbbdac41cc266e1bee00`.
+- Kurucu, Synology DS224+ üzerinde yayımlanan 0.1.2 imajıyla BookOrbit denemesini
+  tamamladığını bildirdi. Bu, otomatik 92 testten ayrı bir kullanıcı denemesidir.
+- Gerçek ARM donanımında çalışma testi yapılmadı. İmaj indirme ve katman
+  doğrulaması, ARM donanımı üzerinde çalıştırma testi değildir.
+- [Katalog PR #11](https://github.com/bookorbit/bookorbit-metadata-providers/pull/11)
+  0.1.2 sürümüne güncellendi. Resmi listeye kabul, bakımcı incelemesine bağlıdır.

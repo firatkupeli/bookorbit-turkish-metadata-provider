@@ -1,0 +1,27 @@
+{
+  "image": "ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2",
+  "account_credentials_used": false,
+  "index_digest": "sha256:d0d1a8d5da2ac4e7751e7e258c189335a77a62b4dba8dbbdac41cc266e1bee00",
+  "platforms": [
+    {
+      "platform": "linux/amd64",
+      "manifest_digest": "sha256:57771fce3d0ac54a1d9c599f0bf935d442c413a2f6c509469e0eeae742b58e32",
+      "layer_count": 9,
+      "container_user": "10001:10001",
+      "version_label": "0.1.2",
+      "packaged_app_version": "0.1.2"
+    },
+    {
+      "platform": "linux/arm64",
+      "manifest_digest": "sha256:5aeb772557e381af8f17610b2aab645355aaea6233d445758286ec02839fd51f",
+      "layer_count": 9,
+      "container_user": "10001:10001",
+      "version_label": "0.1.2",
+      "packaged_app_version": "0.1.2"
+    }
+  ],
+  "unique_blobs_verified": 19,
+  "bytes_downloaded": 103655908,
+  "duration_seconds": 32.77,
+  "result": "success"
+}

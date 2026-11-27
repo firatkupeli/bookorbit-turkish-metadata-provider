@@ -44,8 +44,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c52e7ef32b4b67003fc5454384029964ed154d980de82e21b26e4c7fffc8205d",
-      "bytes": 2837
+      "sha256": "f1d0cc63dbc906920ac5c29f60d136874a6e9ba832cc4c89c3e389811127bae9",
+      "bytes": 3110
     },
     {
       "path": "CONTRIBUTING.md",
@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "sha256": "74086a8af715a923addc5c38f0592e3ef110eabe684dc0948f1ec680e632cc1e",
-      "bytes": 5275
+      "sha256": "88cbd696251d7a537ad925414dea9a94797a5e6cc3b465723e3e1ac5d332c555",
+      "bytes": 5395
     },
     {
       "path": "README.md",
-      "sha256": "c8946f448ef14d3106bd153b11b55741b1a19506f19b92ceb2ed54547d2d22ac",
-      "bytes": 9403
+      "sha256": "98263d4294f9653a8fa95b2def0c0afc775c7cf7731f54012336889ef351863c",
+      "bytes": 9572
     },
     {
       "path": "SECURITY.md",
@@ -154,18 +154,18 @@
     },
     {
       "path": "docs/PUBLISHING.md",
-      "sha256": "860196d67e277154dbdc9ff47be57ff790ca18392f79ae96c7d641ecdf9a565a",
-      "bytes": 4093
+      "sha256": "70cb3196f6fe50272fd08555fc8b23874b4d190e6077801ad37b96ab9d806879",
+      "bytes": 4104
     },
     {
       "path": "docs/RELEASE-CHECKS.md",
-      "sha256": "e30b5335b539820f93acf957b4df3623c3bc0fed22f27c7e6118ced3c3c5e26f",
-      "bytes": 3609
+      "sha256": "cb094f5253c44fb36bc38fcd97f8996c76cd54f6980f5562bf2d2bde2f321984",
+      "bytes": 3610
     },
     {
       "path": "docs/REVIEW-AUDIT-0.1.2.md",
-      "sha256": "fdecaafd1ce0372e4f6ff080ec4afa17c61f7f622ae241cce8798fd36772722e",
-      "bytes": 5379
+      "sha256": "862f8ddf584d687fc7aa1e9a6e9ec94402783f861560c08dbb87d31cc1c75d9e",
+      "bytes": 6480
     },
     {
       "path": "docs/SOURCE_ACCESS.md",
@@ -179,8 +179,8 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "sha256": "7375ff4f9374a895f594a47fd601bdadb1552885350ceb8cc05dd39342cfc0ce",
-      "bytes": 5642
+      "sha256": "0e03eeefa394142bcb91b8b855724846ff22c555df5c3bd5d75797bca619f858",
+      "bytes": 5651
     },
     {
       "path": "docs/conformance-0.1.1.txt",
@@ -221,6 +221,11 @@
       "path": "docs/public-pull-verification-0.1.1.json",
       "sha256": "b86911000bcdac430e023ff728cb4f5cc68e97349304564aca97d8be1a711d00",
       "bytes": 684
+    },
+    {
+      "path": "docs/public-pull-verification-0.1.2.json",
+      "sha256": "9d50a0c5da4f6e8806ba8389783473f483050e0adf994f3cc998592ca0f57d1f",
+      "bytes": 904
     },
     {
       "path": "main.py",

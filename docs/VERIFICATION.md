@@ -1,6 +1,6 @@
 # Doğrulama kaydı
 
-> 0.1.2 adayı için güncel 92 test, API ve canlı süreç kayıtları:
+> Yayımlanmış 0.1.2 için güncel 92 test, API ve imaj doğrulama kayıtları:
 > [İnceleme denetimi](REVIEW-AUDIT-0.1.2.md). Aşağıdaki bölüm yayımlanmış
 > 0.1.1 sürümünün tarihsel doğrulamasıdır.
 
