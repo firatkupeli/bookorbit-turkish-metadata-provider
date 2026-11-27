@@ -1,0 +1,77 @@
+name: Tests
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: stable
+          cache: false
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt -r requirements-dev.txt
+      - name: Check formatting and code
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Run offline tests
+        run: python -m pytest -q
+      - name: Check public release inputs
+        run: python tools/prepare_release.py --check-only
+      - name: Run official conformance checker against offline fixtures
+        shell: bash
+        run: |
+          python -m uvicorn tests.offline_app:app --host 127.0.0.1 --port 8099 --no-access-log > "$RUNNER_TEMP/offline-provider.log" 2>&1 &
+          fixture_pid=$!
+          trap 'kill "$fixture_pid" 2>/dev/null || true' EXIT
+          ready=false
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8099/healthz > /dev/null 2>&1; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            cat "$RUNNER_TEMP/offline-provider.log"
+            exit 1
+          fi
+          go run ./tools/conformance/main.go -url http://127.0.0.1:8099 -query "Otomatik Portakal"
+      - name: Build container
+        run: docker build -t bookorbit-turkish-metadata-provider:test .
+      - name: Check read-only container
+        shell: bash
+        run: |
+          docker run -d --name provider-ci --init --read-only --tmpfs /tmp:rw,size=16m --cap-drop ALL --security-opt no-new-privileges --memory 256m -p 127.0.0.1:8080:8080 bookorbit-turkish-metadata-provider:test
+          trap 'docker rm -f provider-ci > /dev/null 2>&1 || true' EXIT
+          ready=false
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/healthz > /dev/null 2>&1; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            docker logs provider-ci
+            exit 1
+          fi
+          curl -fsS http://127.0.0.1:8080/provider/info
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/search)" = 400
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/book/conformance-unknown-id)" = 404
