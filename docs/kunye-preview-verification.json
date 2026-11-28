@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Künye preview; no NAS or remote repository changes",
+  "tests": {
+    "python": 156,
+    "ruff": "passed",
+    "javascript_syntax": "passed"
+  },
+  "epubcheck": {
+    "version": "5.4.0",
+    "sample": "Original synthetic EPUB 2 with nested NCX, footnotes, images and duplicate cover pages",
+    "epub3_cover_fixed": {
+      "fatals": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "conversion": {
+    "engine": "Kepubify 5.0.0 official vendored WASM",
+    "one_cover_after_replacement": true,
+    "chapter_text_preserved": true,
+    "illustration_and_css_preserved": true
+  },
+  "browser": {
+    "epub3_switch_default": "off",
+    "epub3_switch_when_input_epub3": "disabled",
+    "epub3_download": "passed",
+    "kepub_download": "passed",
+    "live_search": "One successful response with an exact ISBN match; intermittent search deadline timeouts also observed"
+  },
+  "compatibility": {
+    "provider_key": "turkish-metadata",
+    "provider_api_and_network_configuration": "unchanged",
+    "new_features_tested_on_NAS_or_physical_Kobo": false
+  }
+}

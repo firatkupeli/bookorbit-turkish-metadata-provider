@@ -1,0 +1,40 @@
+{
+  "package": "kepubify",
+  "version": "5.0.0",
+  "source_commit": "29f338fe1239f3aa61e9df606fe3c5b9bda30362",
+  "npm_tarball": "https://registry.npmjs.org/kepubify/-/kepubify-5.0.0.tgz",
+  "npm_integrity": "sha512-TEF+QYE6CgHWz30E0TESRY9/4RVUa4BVp4Q9erS7QQ3y9Qr6SCzaqrXgwzOo/J4cE2UJ9RAp0g+JS6by6ajZtg==",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1076,
+      "sha256": "e8db1fa06e4e2da9d59d644dfda27c6f4533ef7bc9a66480bae80b6104f27b86"
+    },
+    {
+      "path": "chunk-3E3Y2FKS.js",
+      "bytes": 4315,
+      "sha256": "40e2adb8251da73004897d5f274203e1941de8c18233c214174451b19bb4d0ea"
+    },
+    {
+      "path": "index.js",
+      "bytes": 505,
+      "sha256": "97887705c25aa699952473b10ca6546339d58538b6454e0cc75c41b0e9a6a7e6"
+    },
+    {
+      "path": "kepubify.wasm",
+      "bytes": 1188937,
+      "sha256": "a5e368c41fed87fe3c6ebd5f9f8641e4fdc2a9123ee42d4c315317b6e101c2d9"
+    },
+    {
+      "path": "kepubify.worker.js",
+      "bytes": 685,
+      "sha256": "ff3969db80eaec8a68727bc5747e75732b73340d89126b2daf456741d63a89c4"
+    },
+    {
+      "path": "worker.js",
+      "bytes": 1931,
+      "sha256": "36fa11fbdddb2ed743e2a3eed25edf32fcb20d71cdfe36e3f57a8cbae25a131b"
+    }
+  ]
+}

@@ -1,5 +1,46 @@
 # Sürüm notları
 
+## 0.4.0 — Erken beta yayın adayı
+
+- Bilgisayardan veya sürükleyerek JPG/PNG kapak seçimi; görsel yeniden sıkıştırılmaz.
+- Mevcut, kaynak ve elle yüklenen kapak için gerçek piksel ölçüsü, biçim ve dosya boyutu.
+- Genel web metinleri kaynaktan bağımsız; sonuçlarda gerçek kaynak adı korunur.
+- Kitapyurdu, deneysel 1000Kitap ve tüm etkin kaynaklar seçenekleri web arayüzünde.
+- BookOrbit aynı sağlayıcı adresinden iki kaynağı ortak süre bütçesiyle arar;
+  sonuçlar dengeli sıralanır, tek kaynak hatası diğerinin sonuçlarını engellemez.
+- İki kaynağın kalıcı kitap kimlikleri desteklenir; sağlayıcı anahtarı korunur.
+- Tek kaynak ve birleşik aramaların önbellek anahtarları ayrıdır; kitap önbelleği
+  kaynak kimlikleriyle paylaşılır ve toplam boyut sınırı korunur.
+- Kapak biçimi değişince dosya uzantısı ve XHTML/SVG/CSS referansları da güncellenir.
+- Kullanıcı NAS kurulumunu ve testlerini tamamladığını bildirdi. Genel kaynak
+  paketi kişisel IP/ağ bilgileri ve özel NAS YAML dosyaları içermez.
+- GHCR imaj yayını ve GitHub CI, v0.4.0 etiketi oluşturulduğunda ayrıca doğrulanır.
+
+## 0.3.0 — Künye / NAS deneme adayı
+
+- Bağımsız Künye web arayüzü; mevcut BookOrbit sağlayıcı kimliği korunur.
+- İsteğe bağlı EPUB 3 yükseltmesi ve yinelenen başlangıç kapaklarının düzeltilmesi.
+- İndirilecek dosyadan okunan alan ve kapak karşılaştırması; incelemeden indirme başlamaz.
+- İlk yüklenen metadata, kapak ve çıktı seçeneklerine geri dönme.
+- Kaynak veya hazırlanmış çıktı için sınırlı kitap kontrol raporu.
+- Eksik görseller, kırık bağlantılar, içindekiler ve arşiv yapısı denetlenir.
+- EPUB ve KEPUB çıktıları tarayıcı belleğinde inceleme için tutulur; dosya sunucuda saklanmaz.
+- [Önizleme kapsamı ve sınırlar](docs/KUNYE_PREVIEW.md).
+
+## 0.2.0 — Yayımlanmamış geliştirme adayı
+
+- Mevcut .kepub/.kepub.epub metadata düzenleme; Kobo span ve bölüm dosyaları korunur.
+- Gerçek EPUB → KEPUB dönüşümü: Kepubify 5.0.0, tarayıcı worker'ında ve yerel WASM dosyalarıyla.
+
+- Aynı FastAPI servisinde EPUB yükleme, metadata düzenleme ve indirme arayüzü.
+- Kitapyurdu baskı seçimi, alan bazında aktarım ve varsayılan boş alanları doldurma.
+- EPUB 2/3 için yazar, çevirmen rolü, Türkçe açıklama, yayınevi, tarih, dil ve ISBN.
+- İsteğe bağlı kaynak JPEG/PNG kapağı; bölüm/font dosyaları ve ana kimlik korunur.
+- Sınırlı ve kalıcı saklama yapmayan ZIP/XML işleme, aynı origin ve API token kontrolü.
+- 141 yerel test ve resmi API uygunluk kontrolü geçti. Tarayıcıda canlı kaynakla
+  örnek EPUB yükleme, aktarma ve indirme tamamlandı. Bu ilk arayüz daha sonra kullanıcı tarafından NAS ve Kobo üzerinde denendi.
+- [Ayrıntılar](docs/WEB_EDITOR.md).
+
 ## 0.1.2 — 2026-11-27 / erken beta
 
 - `0000000000` ISBN-10 yer tutucusu ve ASCII dışı ISBN rakamları reddedilir;

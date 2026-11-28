@@ -5,7 +5,11 @@ def test_warm_isbn_search_reuses_exact_edition(client):
     response = api.get("/search", params={"isbn": "9786052957929"})
     assert response.status_code == 200
     assert response.json()["matches"][0]["providerId"] == "kitapyurdu:51855"
-    assert len(calls) == before
+    assert all(call.url.host == "1000kitap.com" for call in calls[before:])
+    assert any(call.url.path == "/ara" for call in calls[before:])
+    after = len(calls)
+    assert api.get("/search", params={"isbn": "9786052957929"}).json() == response.json()
+    assert len(calls) == after
 
 
 def test_cold_isbn_search_does_not_guess_matches(client):

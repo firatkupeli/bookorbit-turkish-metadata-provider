@@ -38,7 +38,21 @@ ROOT_FILES = (
     "uv.lock",
 )
 DIRECTORIES = ("app", "tests", "docs", "tools", ".github")
-SUFFIXES = {".py", ".md", ".go", ".mod", ".sum", ".txt", ".json", ".html", ".yaml", ".yml"}
+SUFFIXES = {
+    ".py",
+    ".md",
+    ".go",
+    ".mod",
+    ".sum",
+    ".txt",
+    ".json",
+    ".html",
+    ".yaml",
+    ".yml",
+    ".js",
+    ".mjs",
+    ".css",
+}
 EXCLUDED_PARTS = {
     ".git",
     ".venv",
@@ -55,6 +69,8 @@ PATTERNS = (
     ("Unix user path", re.compile(r"/(?:home|Users)/[A-Za-z0-9_.-]+/")),
 )
 IPV4 = re.compile(r"(?<![\w.])(?:\d{1,3}\.){3}\d{1,3}(?![\w.])")
+KEPUB_WASM_DIGEST = "a5e368c41fed87fe3c6ebd5f9f8641e4fdc2a9123ee42d4c315317b6e101c2d9"
+BINARY_INPUTS = {"app/static/vendor/kepubify/kepubify.wasm": KEPUB_WASM_DIGEST}
 
 
 def check_text(name: str, content: str) -> list[str]:
@@ -82,7 +98,11 @@ def collect_files() -> dict[str, bytes]:
             relative = path.relative_to(ROOT)
             if any(part in EXCLUDED_PARTS for part in relative.parts):
                 continue
-            if path.is_file() and (path.suffix in SUFFIXES or path.name == "LICENSE"):
+            if path.is_file() and (
+                path.suffix in SUFFIXES
+                or path.name == "LICENSE"
+                or relative.as_posix() in BINARY_INPUTS
+            ):
                 candidates.append(path)
 
     files = {}
@@ -95,9 +115,13 @@ def collect_files() -> dict[str, bytes]:
         if ".local." in path.name or path.name in {"compose.override.yaml", "compose.override.yml"}:
             continue
         data = path.read_bytes()
-        # All allowlisted inputs are text; canonical line endings make ZIPs reproducible.
-        data.decode("utf-8")
-        files[name] = data.replace(b"\r\n", b"\n")
+        if name in BINARY_INPUTS:
+            if hashlib.sha256(data).hexdigest() != BINARY_INPUTS[name]:
+                raise ValueError(f"Unexpected binary release input: {name}")
+            files[name] = data
+        else:
+            data.decode("utf-8")
+            files[name] = data.replace(b"\r\n", b"\n")
     return dict(sorted(files.items()))
 
 
@@ -108,6 +132,8 @@ def validate(files: dict[str, bytes]) -> str:
         raise ValueError("Application and project versions differ")
     problems = []
     for name, data in files.items():
+        if name in BINARY_INPUTS:
+            continue
         problems.extend(check_text(name, data.decode("utf-8")))
     if problems:
         raise ValueError("Public package check failed:\n" + "\n".join(problems))
@@ -115,6 +141,12 @@ def validate(files: dict[str, bytes]) -> str:
         raise ValueError("Upstream conformance license must be included")
     if ".github/workflows/test.yml" not in files:
         raise ValueError("Test workflow must be included")
+    vendor = "app/static/vendor/kepubify/"
+    vendor_manifest = json.loads(files[vendor + "VENDOR.json"])
+    for entry in vendor_manifest["files"]:
+        payload = files.get(vendor + entry["path"], b"")
+        if len(payload) != entry["bytes"] or hashlib.sha256(payload).hexdigest() != entry["sha256"]:
+            raise ValueError(f"Kepubify vendor integrity mismatch: {entry['path']}")
     return version
 
 

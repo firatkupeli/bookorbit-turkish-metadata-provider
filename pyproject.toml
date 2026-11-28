@@ -1,15 +1,18 @@
 [project]
 name = "bookorbit-turkish-metadata-provider"
-version = "0.1.2"
+version = "0.4.0"
 requires-python = ">=3.12"
 description = "Modular Turkish metadata provider for BookOrbit"
 license = "MIT"
 dependencies = [
+    "defusedxml==0.7.1",
+    "pillow==13.0.0",
     "beautifulsoup4==4.15.0",
     "cachetools==8.0.3",
     "fastapi==0.165.0",
     "httpx==0.29.0",
     "pydantic-settings==2.16.3",
+    "python-multipart==0.0.34",
     "uvicorn==0.49.0",
 ]
 

@@ -1,23 +1,39 @@
-# BookOrbit Turkish Metadata Provider
+# Künye — EPUB & KEPUB Workshop
 
 [Türkçe kurulum ve Field Rules rehberi](README.md)
 
-> **Published version: 0.1.2, early beta.** Includes ISBN validation/fallback,
-> error priority and cover selection fixes. Public amd64 and arm64 images are
-> available. See the [audit and publication checks](docs/REVIEW-AUDIT-0.1.2.md).
+> **0.4.0 / early beta release candidate.**
+> Upload JPG/PNG covers, compare actual image dimensions, format and size,
+> and select a web metadata source. 1000Kitap is experimental. Optional EPUB 3,
+> KEPUB and review before download remain available.
+> BookOrbit searches Kitapyurdu and 1000Kitap through the same provider address.
+> See [usage and limitations](docs/KUNYE_PREVIEW.md).
+> The BookOrbit provider identity and API remain compatible. The installer
+> completed the NAS installation and acceptance tests. Before pulling 0.4.0,
+> verify that its **Publish container** workflow succeeded and the package is Public.
+
+> The older **0.1.2** image contains the previous provider. Künye's web editor
+> and 1000Kitap support require 0.4.0. [Historical audit](docs/REVIEW-AUDIT-0.1.2.md).
 
 An independent Python 3.12 / FastAPI external metadata provider for BookOrbit.
+
+In 0.4.0, `/search` queries Kitapyurdu and experimental 1000Kitap
+within the same deadline, interleaving their ranked results. If one source
+fails, available matches are returned with `partial: true`. Existing
+`kitapyurdu:<id>` records remain valid; `1000kitap:<id>` lookup is supported
+too. The provider key, address and Field Rules stay the same. Single-source
+selection in the web editor remains independent.
+
 The first source is Kitapyurdu. The source adapter interface supports adding
 other Turkish sources later.
 
-**0.1.2 validation:** 92 automated tests, the official BookOrbit conformance
-checker, Docker build and read-only container checks passed in
-[GitHub CI](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46052947375). Both architectures' image layers were downloaded
-anonymously and verified with SHA-256. The installer reported completing a
-BookOrbit test with the published 0.1.2 image on Synology DS224+.
-This is limited testing, not a guarantee for every edition or library.
-See the [current audit](docs/REVIEW-AUDIT-0.1.2.md) and
-[historical 0.1.1 verification](docs/VERIFICATION.md).
+**0.4.0 validation:** 189 automated tests, Ruff and the official BookOrbit
+conformance checker passed. EPUBCheck 5.4.0 reported no errors or warnings
+for generated EPUB 3 and KEPUB samples. The installer reported completing
+NAS installation and acceptance tests. This is limited testing, not a
+guarantee for every book or device; physical ARM64 testing has not been performed.
+See [test scope](docs/KUNYE_PREVIEW.md) and
+[machine-readable results](docs/preview-verification-0.4.0.json).
 
 ## Source access and content rights
 
@@ -31,45 +47,54 @@ covers project code, not third-party descriptions, metadata or cover art.
 See [source access review](docs/SOURCE_ACCESS.md) and
 [third-party notices](THIRD_PARTY_NOTICES.md).
 
-## Install with the published image
+## Installation — 0.4.0
 
-Docker Engine and Compose v2 are required. Public image:
+Docker Engine and Compose v2 are required. Network/IP fields are supplied by
+the operator; no personal network settings or credentials are included.
 
-```text
-ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
-```
+### Build from source
 
-Both `linux/amd64` and `linux/arm64` images are published. All image layers for
-both architectures were downloaded anonymously and verified against their SHA-256
-digests. Actual ARM hardware runtime testing has not been performed.
-
-1. Download and extract this repository's files into one directory.
+1. Extract the source files into one directory; `Dockerfile`, `app` and
+   `main.py` must share the same root.
 2. Copy `.env.example` to `.env`.
-3. Set `BOOKORBIT_NETWORK` to an existing Docker network shared with the
-   BookOrbit server container. The supplied name is only an example.
-4. Set `PROVIDER_IMAGE` in the same `.env` file:
-
-   ```dotenv
-   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
-   ```
-
-5. Run these commands in the project directory:
+3. Fill the empty `BOOKORBIT_NETWORK` field with an existing Docker network
+   reachable from the BookOrbit server container.
+4. Leave `PROVIDER_IMAGE` empty and run:
 
    ```sh
    docker compose config --quiet
-   docker compose pull
-   docker compose up -d --no-build
+   docker compose up -d --build
    docker compose ps
    ```
 
-No GHCR login or personal access token is required.
-For a local source build, leave `PROVIDER_IMAGE` empty and use
-`docker compose up -d --build` instead.
+The service exposes port 8080 to its Docker network. The web editor is at `/`
+on the same service as the BookOrbit API.
 
+### Use the 0.4.0 registry image
+
+Use this method after the **v0.4.0 Publish container** workflow has succeeded
+and its package is Public. Set this value in your own `.env` file:
+
+```dotenv
+PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.4.0
+```
+
+Then run:
+
+```sh
+docker compose config --quiet
+docker compose pull
+docker compose up -d --no-build
+docker compose ps
+```
+
+A published Public image can be pulled without GHCR login or a personal token.
 The general Compose file uses native architecture. The optional
 [Synology macvlan example](docs/SYNOLOGY.md) targets DS224+ / amd64 and requires
-the operator's own existing network and unused static IP. Set `PROVIDER_IMAGE`
-to the GHCR address above when choosing the published image.
+the operator's own existing network and unused static IP. Keep only the
+selected configuration as `docker-compose.yml` in the NAS installation copy.
+The publishing workflow targets amd64/arm64; physical ARM64 runtime testing
+has not been performed.
 
 ## Connect to BookOrbit
 
@@ -107,7 +132,7 @@ Review a single-book Auto-fill result before saving or applying changes broadly.
 
 In-memory bounded cache, source pacing, request deadlines, API throttling,
 UTF-8, non-root/read-only container, one worker and 256 MiB memory limit.
-Settings are in `.env.example`; there is no separate admin dashboard.
+Settings are in `.env.example`; the EPUB web editor is at `/`.
 `/healthz` checks process health, `/docs` provides interactive API documentation.
 
 [Development / offline tests](CONTRIBUTING.md) ·

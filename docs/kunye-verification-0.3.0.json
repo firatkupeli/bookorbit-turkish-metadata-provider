@@ -1,0 +1,42 @@
+{
+  "version": "0.3.0",
+  "date": "2026-11-28",
+  "python_tests": 167,
+  "browser_fixture_mode": true,
+  "browser_console_errors": 0,
+  "before_after_fields_and_cover": "passed",
+  "reviewed_epub3_and_kepub_download": "passed",
+  "reset_metadata_cover_and_format": "passed",
+  "changed_again_invalidates_old_artifact": "passed",
+  "downloads": [
+    {
+      "kind": "epub",
+      "title_matches_review": true,
+      "version": "3.0",
+      "cover_pages": 1,
+      "errors": 0,
+      "warnings": 0,
+      "sha256": "82dc4fb4219750eee4f4d53517652ca3f2749d4034c81ca60f4c35dc2e773410"
+    },
+    {
+      "kind": "kepub",
+      "title_matches_review": true,
+      "version": "3.0",
+      "cover_pages": 1,
+      "errors": 0,
+      "warnings": 0,
+      "sha256": "66204aad2f2f549804477fe7ef7e3adc02efb597307214f54b275f158af62749"
+    },
+    {
+      "kind": "epub",
+      "title_matches_review": true,
+      "version": "2.0",
+      "cover_pages": 2,
+      "errors": 0,
+      "warnings": 1,
+      "sha256": "520128388e4ee29cc82353999fb29b414d70602ee76f729a8943e64e73efbc58"
+    }
+  ],
+  "NAS_or_physical_Kobo_tested": false,
+  "provider_key": "turkish-metadata"
+}

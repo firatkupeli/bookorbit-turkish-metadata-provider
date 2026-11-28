@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "environment": "local Python 3.12 + browser; not Docker or NAS",
+  "source": "Kitapyurdu live HTML",
+  "test_epub": "synthetic, no copyrighted book text",
+  "title": "Şehit!",
+  "authors": [
+    "Kaveh Akbar"
+  ],
+  "translators": [
+    "Berkan M. Şimşek"
+  ],
+  "publisher": "HOLDEN KİTAP",
+  "isbn": "9786255539007",
+  "published_date": "2025-02-27",
+  "description_characters": 862,
+  "cover_bytes": 78687,
+  "original_book_content_unchanged": true,
+  "primary_identifier_unchanged": true,
+  "input_sha256": "bd1e4a81173f7d44549a61e8eb3f7aa117bf039b93af038864a397423f1084ba",
+  "output_sha256": "92213d42c89aad22f0a6da5ef04771a96e4d4b6a02af6f30ed73ef47951e9501",
+  "browser_console_errors": 0,
+  "result": "success"
+}

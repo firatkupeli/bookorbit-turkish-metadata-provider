@@ -19,6 +19,12 @@ def make_source_transport():
         params = parse_qs(request.url.query.decode())
         if request.url.path == "/robots.txt":
             return httpx.Response(200, text="User-agent: *\nDisallow: /admin/\nDisallow: /img/\n")
+        if request.url.host == "1000kitap.com" and request.url.path == "/ara":
+            return httpx.Response(
+                200,
+                text='<main class="govde-arama">Gösterilecek içerik bulunamadı.</main>',
+                headers={"Content-Type": "text/html"},
+            )
         if params.get("route") == ["product/list"]:
             name = params.get("filter_name", [""])[0]
             fixture = (

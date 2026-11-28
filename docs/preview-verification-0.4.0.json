@@ -1,0 +1,103 @@
+{
+  "version": "0.4.0",
+  "date": "2026-11-28",
+  "stage": "release-candidate",
+  "offlineTests": {
+    "passed": 189,
+    "warnings": 1,
+    "warning": "Existing Starlette/httpx deprecation"
+  },
+  "ruff": "passed",
+  "javascriptSyntax": "passed",
+  "dependencyLock": "passed",
+  "publicPackageInputs": "passed",
+  "bookorbitConformance": {
+    "failures": 0,
+    "warnings": 0,
+    "fixtureSource": "offline",
+    "providerKey": "turkish-metadata"
+  },
+  "liveExperimentalSource": {
+    "source": "1000kitap",
+    "providerId": "1000kitap:488817",
+    "isbn": "9786257440820",
+    "exactIsbnMatch": true,
+    "coldLookup": "passed",
+    "cover": {
+      "width": 275,
+      "height": 385,
+      "format": "JPEG",
+      "bytes": 66983
+    },
+    "scope": "One known edition; no claim of exhaustive search coverage"
+  },
+  "browser": {
+    "manualUpload": "passed",
+    "manualCover": {
+      "width": 1200,
+      "height": 1800,
+      "format": "JPEG",
+      "bytes": 34528
+    },
+    "originalCover": {
+      "width": 1,
+      "height": 1,
+      "format": "PNG"
+    },
+    "realBeforeAfterComparison": "passed",
+    "epub3AndKepubDownload": "passed",
+    "downloadSha256": "b14133487e00858fc778b7477b5bf5a9cf8d0961383dc0430b9d9a15d6a31a28",
+    "manualCoverBytesPreserved": true,
+    "singleOpeningCover": true,
+    "primaryBookIdentityPreserved": true,
+    "koboSpansPresent": true,
+    "restoreOriginal": "passed",
+    "consoleErrorsAndWarnings": 0
+  },
+  "epubcheck": {
+    "version": "5.4.0",
+    "epub3": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "browserKepub": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "nasDeployment": "passed; installer-reported",
+  "physicalKoboTest": "not-performed",
+  "githubPublication": "not-performed",
+  "bookorbitApiSources": [
+    "kitapyurdu",
+    "1000kitap"
+  ],
+  "multiSourceTests": {
+    "sourceFailureIsolation": "passed",
+    "timeoutKeepsProgress": "passed",
+    "balancedResults": "passed",
+    "cacheIsolation": "passed",
+    "savedIdsAfterRestart": "passed",
+    "sameProviderKey": "turkish-metadata"
+  },
+  "combinedLiveSearch": {
+    "isbn": "9786255539007",
+    "providerIds": [
+      "kitapyurdu:711075",
+      "1000kitap:482332"
+    ],
+    "pages": [
+      424,
+      424
+    ],
+    "seconds": 12.062,
+    "partial": true,
+    "deadlineSeconds": 12,
+    "fullSourceCoverageClaimed": false
+  },
+  "nasAcceptanceTests": {
+    "status": "passed",
+    "evidence": "Installer confirmed NAS build and acceptance tests in the conversation",
+    "independentPhysicalKoboTestFor040": "not-separately-reported"
+  }
+}

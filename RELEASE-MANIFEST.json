@@ -1,6 +1,6 @@
 {
   "project": "bookorbit-turkish-metadata-provider",
-  "version": "0.1.2",
+  "version": "0.4.0",
   "files": [
     {
       "path": ".dockerignore",
@@ -9,18 +9,18 @@
     },
     {
       "path": ".env.example",
-      "sha256": "80481296fdb909f3413ec7851f4413824f12ded327d17decfcd82a20eccb98d0",
-      "bytes": 565
+      "sha256": "9e20346ec9a7b12786f8e5a0cd53d1aa507a2e97e4432845ab39777489bedb37",
+      "bytes": 548
     },
     {
       "path": ".env.synology.example",
-      "sha256": "fca15063a0a149f2b9b737f6019524dd3a0d3a08ca43505f4b3bc16793446ba6",
+      "sha256": "a89e3afa745f812415ec669a6d3f487bf00dffefbc783775aedb29368bf918b9",
       "bytes": 513
     },
     {
       "path": ".gitattributes",
-      "sha256": "9a5b3e8c93ebcd35a580f2c2cf3b51cad2f4e5c1514a6984f454f36b355dacd8",
-      "bytes": 58
+      "sha256": "05b96236b323196c9c72a9465dba0595ec13bc843efa9a7b7cc0bb2d6e913051",
+      "bytes": 72
     },
     {
       "path": ".github/dependabot.yml",
@@ -34,8 +34,8 @@
     },
     {
       "path": ".github/workflows/test.yml",
-      "sha256": "0ad5bd29ca9556bc08e780ede2b33a7c26fa515df3ad330a9133520fe5454e4a",
-      "bytes": 2930
+      "sha256": "51462e3e7ce00a5ed493ad4830eab605d6816ee45c3174178acb3ac737a556e6",
+      "bytes": 3110
     },
     {
       "path": ".gitignore",
@@ -44,8 +44,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f1d0cc63dbc906920ac5c29f60d136874a6e9ba832cc4c89c3e389811127bae9",
-      "bytes": 3110
+      "sha256": "fe183995759cfe8e9de8fc2a44c4ed49f7c8c2225114d6f92c43f8ddc4d168c8",
+      "bytes": 5976
     },
     {
       "path": "CONTRIBUTING.md",
@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "sha256": "88cbd696251d7a537ad925414dea9a94797a5e6cc3b465723e3e1ac5d332c555",
-      "bytes": 5395
+      "sha256": "7dc69ad78c399b0ecec07967e76aab4ec37a9e087e3517b3869d1c098c3855d2",
+      "bytes": 6411
     },
     {
       "path": "README.md",
-      "sha256": "98263d4294f9653a8fa95b2def0c0afc775c7cf7731f54012336889ef351863c",
-      "bytes": 9572
+      "sha256": "dd9f7730d60c2d16d2ecfa10d78c6f378915c8a14010b94365b8dc349cbbbb1e",
+      "bytes": 10559
     },
     {
       "path": "SECURITY.md",
@@ -79,18 +79,18 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "29bdb59c2a7e9fde0bff87274c04369bc6b5cd83e193adbd8548a3427a079a00",
-      "bytes": 944
+      "sha256": "599e36035c0c0279bc48755f98a6cda56f56ca77bcefd2c8c96e8921edb80711",
+      "bytes": 78973
     },
     {
       "path": "app/__init__.py",
-      "sha256": "62fb98cd69cab6a05bf88a86f0702efa7848600b208fd56673f6fda3bbcefa3b",
+      "sha256": "e364931a8afff672985ee99f795e6d8b20ff33c55d71d757ec211ec6689b3c19",
       "bytes": 22
     },
     {
       "path": "app/api.py",
-      "sha256": "4c77611ad7efdf1b5f4fddf1a58528a352a8fe717f4d482f4bfd266e7dc592a4",
-      "bytes": 5749
+      "sha256": "97551b1c4f619b3f7d3b0e0da213dfa33f073e0eccbc34b0edc9d9ea463dbf3c",
+      "bytes": 6486
     },
     {
       "path": "app/cache.py",
@@ -103,14 +103,39 @@
       "bytes": 837
     },
     {
+      "path": "app/epub.py",
+      "sha256": "d8f238c0dd3105dedf1f3d19ec630d32cd92d3ddffad4b03d37591206f2f9655",
+      "bytes": 25226
+    },
+    {
+      "path": "app/epub_check.py",
+      "sha256": "ce68da5ae677b4059a6dfd8b74ca02c36339dd834c77eecbc923c1d9cd436494",
+      "bytes": 10067
+    },
+    {
+      "path": "app/epub_structure.py",
+      "sha256": "04bd233532af011a6f786c325c8f33acd3e80671be9d32bd8c8552d2940081dd",
+      "bytes": 9255
+    },
+    {
+      "path": "app/epub_upgrade.py",
+      "sha256": "b06e9536d8d6b7167e3a2336b384cbedb4271234fe02319f051c55ffb14f3559",
+      "bytes": 19825
+    },
+    {
       "path": "app/errors.py",
       "sha256": "278e409322da5a8a58dd030b3f23f797d1c575e7e1176bf256a0a474ba08be1b",
       "bytes": 353
     },
     {
       "path": "app/http.py",
-      "sha256": "ede9848acb1c76a855565a07d46b34741e402a32c031b36d02a60f348825df37",
-      "bytes": 5817
+      "sha256": "0c8d26b8520bb50b3e6dde054e286834f93c8e90de8793a322498e984fcfecef",
+      "bytes": 6686
+    },
+    {
+      "path": "app/images.py",
+      "sha256": "9abe3a0f8bc606035052abdca86b50a92d2b5fe15fdcf57b866969f9c43c276e",
+      "bytes": 1707
     },
     {
       "path": "app/models.py",
@@ -119,8 +144,8 @@
     },
     {
       "path": "app/service.py",
-      "sha256": "df0b7eef7e0676c47e9d95e91f33eff82d73920c6b55fda2dd987b422c3f5c11",
-      "bytes": 3114
+      "sha256": "ee595cc1dc5c910c553f91b7116bdf283cb919b437396e8d6aafa7bf8f8586b8",
+      "bytes": 4438
     },
     {
       "path": "app/sources/__init__.py",
@@ -133,9 +158,69 @@
       "bytes": 795
     },
     {
+      "path": "app/sources/binkitap.py",
+      "sha256": "3e3f1335326c835e38239b37929a92f3f19d324c655a361b1303345a2ff51295",
+      "bytes": 6755
+    },
+    {
       "path": "app/sources/kitapyurdu.py",
       "sha256": "11a94493124f3a36db7716fc9e72a73b46bb8b86c12d5f8f494a6dc1282f1d03",
       "bytes": 13947
+    },
+    {
+      "path": "app/static/app.js",
+      "sha256": "f54e485b4d1b6738d059deded7263fbe0d82dbdeaa1e2cbe2a983fca837ffbf4",
+      "bytes": 24697
+    },
+    {
+      "path": "app/static/index.html",
+      "sha256": "a5aeb340e4641e51ccd08cc7815bf8f4db8c5b3a409acd637f8f1d96229f2acd",
+      "bytes": 10167
+    },
+    {
+      "path": "app/static/kepub.js",
+      "sha256": "8da8a3c73499e4ba0e5b2eccf3518a182b4cb52dc4c547727ae62a8fdbd099bf",
+      "bytes": 1593
+    },
+    {
+      "path": "app/static/style.css",
+      "sha256": "f57d135ce91a1b643da7c2fdd1b34939fc1f12c3e66c350a9013912630e08193",
+      "bytes": 17019
+    },
+    {
+      "path": "app/static/vendor/kepubify/LICENSE",
+      "sha256": "e8db1fa06e4e2da9d59d644dfda27c6f4533ef7bc9a66480bae80b6104f27b86",
+      "bytes": 1076
+    },
+    {
+      "path": "app/static/vendor/kepubify/VENDOR.json",
+      "sha256": "dca12d9470df72198f97838c56ebd7eaad2bbaec81134734b48118b0673f2e6f",
+      "bytes": 1228
+    },
+    {
+      "path": "app/static/vendor/kepubify/chunk-3E3Y2FKS.js",
+      "sha256": "40e2adb8251da73004897d5f274203e1941de8c18233c214174451b19bb4d0ea",
+      "bytes": 4315
+    },
+    {
+      "path": "app/static/vendor/kepubify/index.js",
+      "sha256": "97887705c25aa699952473b10ca6546339d58538b6454e0cc75c41b0e9a6a7e6",
+      "bytes": 505
+    },
+    {
+      "path": "app/static/vendor/kepubify/kepubify.wasm",
+      "sha256": "a5e368c41fed87fe3c6ebd5f9f8641e4fdc2a9123ee42d4c315317b6e101c2d9",
+      "bytes": 1188937
+    },
+    {
+      "path": "app/static/vendor/kepubify/kepubify.worker.js",
+      "sha256": "ff3969db80eaec8a68727bc5747e75732b73340d89126b2daf456741d63a89c4",
+      "bytes": 685
+    },
+    {
+      "path": "app/static/vendor/kepubify/worker.js",
+      "sha256": "36fa11fbdddb2ed743e2a3eed25edf32fcb20d71cdfe36e3f57a8cbae25a131b",
+      "bytes": 1931
     },
     {
       "path": "app/text.py",
@@ -143,24 +228,39 @@
       "bytes": 2502
     },
     {
+      "path": "app/web.py",
+      "sha256": "96a0db4ca8a43f07dfb75e8d1174d50c8e98d429a661a85f72bd50926ca73b43",
+      "bytes": 14852
+    },
+    {
       "path": "compose.synology.yaml",
-      "sha256": "3f96caee6d1e9d3e8def044297168b83549db20d755404f1a89d76afb5f35234",
+      "sha256": "dcb2e2e9f759ca7a14539cccc61322edec3e33a009c21142c2b3078580d02ec3",
       "bytes": 1327
     },
     {
       "path": "compose.yaml",
-      "sha256": "be89c1d7524f712fbd9f7f7cbbb1f0c5a42050863150a574b1137164637f164f",
+      "sha256": "e783c8c10d62897ed06288f23e4d8d675751ca9535fe09e3033377a7776556a0",
       "bytes": 1151
     },
     {
+      "path": "docs/KUNYE_PREVIEW.md",
+      "sha256": "ba5c9ae3205636f1df5208fb19afa68ed43bd0f5d9c94d831210f7079da1b999",
+      "bytes": 9592
+    },
+    {
       "path": "docs/PUBLISHING.md",
-      "sha256": "70cb3196f6fe50272fd08555fc8b23874b4d190e6077801ad37b96ab9d806879",
-      "bytes": 4104
+      "sha256": "3827cc9546b2f91bc600719aa4866073478ca99c60b7d5381bde3c1f8d74722a",
+      "bytes": 4223
     },
     {
       "path": "docs/RELEASE-CHECKS.md",
       "sha256": "cb094f5253c44fb36bc38fcd97f8996c76cd54f6980f5562bf2d2bde2f321984",
       "bytes": 3610
+    },
+    {
+      "path": "docs/RELEASE-NOTES-0.4.0.md",
+      "sha256": "5d482a4d59472432d8222c07eeea874bfaafb7018a4ab76d25d703988c80f46a",
+      "bytes": 2615
     },
     {
       "path": "docs/REVIEW-AUDIT-0.1.2.md",
@@ -169,18 +269,23 @@
     },
     {
       "path": "docs/SOURCE_ACCESS.md",
-      "sha256": "fb4db86e4895f7352d37a512527f350c3c4377a5e0b2456e66906c274f530c61",
-      "bytes": 3036
+      "sha256": "6ec5b438efa2fc95caf17a873145714c45b1184367ebd8fa798216aff9c886ea",
+      "bytes": 4525
     },
     {
       "path": "docs/SYNOLOGY.md",
-      "sha256": "68f11cbac34050236866b6c65dc9d095279994cd83e8d7c9c56897acaccc1e35",
-      "bytes": 6793
+      "sha256": "c8c40ad05dc71632aa46cc0d9346000cc6321fe4ce6610f4e4b7ca73447c6f93",
+      "bytes": 6884
     },
     {
       "path": "docs/VERIFICATION.md",
       "sha256": "0e03eeefa394142bcb91b8b855724846ff22c555df5c3bd5d75797bca619f858",
       "bytes": 5651
+    },
+    {
+      "path": "docs/WEB_EDITOR.md",
+      "sha256": "040ada33b6c6ac961ba315f51ed04b38e0095efd757e68c48ae21c1774551173",
+      "bytes": 6352
     },
     {
       "path": "docs/conformance-0.1.1.txt",
@@ -203,6 +308,31 @@
       "bytes": 287
     },
     {
+      "path": "docs/conformance-offline-0.2.0.txt",
+      "sha256": "18917d9bdb0bd983b76593b483f12429a995c298e4c24ff200300a7222b954ba",
+      "bytes": 288
+    },
+    {
+      "path": "docs/conformance-offline-0.4.0.txt",
+      "sha256": "9b1be62db7af7333d82ac1f0562bce133b3b9682537f3166ca59990e33f10d1d",
+      "bytes": 288
+    },
+    {
+      "path": "docs/kepub-verification-0.2.0.json",
+      "sha256": "30d6959420a25a9e7d4af33c5909d7c45cb35acff230be3477f6f671427eb9af",
+      "bytes": 619
+    },
+    {
+      "path": "docs/kunye-preview-verification.json",
+      "sha256": "dd0167a15fb9d648ace4f0d279758176a955fa8f23e5ca6e4d01b09c1cb78e52",
+      "bytes": 1104
+    },
+    {
+      "path": "docs/kunye-verification-0.3.0.json",
+      "sha256": "d5c23ba5e3d3089372ba01cbae8fec01ab1b66a156c56344a2c91d4404034d2c",
+      "bytes": 1156
+    },
+    {
       "path": "docs/live-verification-0.1.1.json",
       "sha256": "dbd242c4a79282512cfc7900655560611c442de407984270b6262ecc087b064c",
       "bytes": 1150
@@ -218,6 +348,11 @@
       "bytes": 1620
     },
     {
+      "path": "docs/preview-verification-0.4.0.json",
+      "sha256": "506dc0614891ec9a1305d6ee60828ea8728d210447286ad9af0501ac8889f913",
+      "bytes": 2584
+    },
+    {
       "path": "docs/public-pull-verification-0.1.1.json",
       "sha256": "b86911000bcdac430e023ff728cb4f5cc68e97349304564aca97d8be1a711d00",
       "bytes": 684
@@ -228,14 +363,19 @@
       "bytes": 904
     },
     {
+      "path": "docs/web-editor-verification-0.2.0.json",
+      "sha256": "8074edd8d8e5025789b5548b254b84d1ad75c5df93e4e7495ac18f0f7d4834ed",
+      "bytes": 751
+    },
+    {
       "path": "main.py",
       "sha256": "b31d898b9815fd1c3fbefc6576f803e55228289bb0a689015bb5b68bd0b51974",
       "bytes": 78
     },
     {
       "path": "pyproject.toml",
-      "sha256": "381fa921233d85e4fa53bbb4d843c32560f409321c65e04edc5dabf744b5192f",
-      "bytes": 715
+      "sha256": "6e897f5ce5ceecdc81dd03b66e2c8a2944f525cb427e81c0f56023f5e8b3b600",
+      "bytes": 794
     },
     {
       "path": "requirements-dev.txt",
@@ -244,8 +384,8 @@
     },
     {
       "path": "requirements.txt",
-      "sha256": "9e6a8a7843d7c79cf6a6e93ddbbea9617599669bd3a5f3cd771a22bc0a458ab3",
-      "bytes": 1544
+      "sha256": "37ce9a09d76077a88199ad9acc34d49efcd834ebb0a8be938f694ea5c0dcb5be",
+      "bytes": 1740
     },
     {
       "path": "tests/__init__.py",
@@ -254,8 +394,8 @@
     },
     {
       "path": "tests/conftest.py",
-      "sha256": "a943ca9ef3b39b21ed42a3f59b991799b26de4912c8fe1050e22d0d76eb26e6a",
-      "bytes": 1664
+      "sha256": "504bc5c887de3538c7aee0ac22df61b3c0fa1c9aed0d02d34a4e70ed545b71e5",
+      "bytes": 1960
     },
     {
       "path": "tests/fixtures/book-51855.html",
@@ -293,14 +433,54 @@
       "bytes": 322
     },
     {
+      "path": "tests/offline_web_app.py",
+      "sha256": "7cec9a95ab90c7c06e2e897bf93c13c958310b627cff6dfd7f782cff429f2ad2",
+      "bytes": 1292
+    },
+    {
+      "path": "tests/test_binkitap.py",
+      "sha256": "7db9e6fa0aa2c49cbbbc55d77b61ecf49784a47aee4865638a8863fba9bcacfd",
+      "bytes": 4800
+    },
+    {
       "path": "tests/test_contract.py",
-      "sha256": "9c266b73f7a7c032bd0f384f232030e139696ca5116cbd749ccf4dede665e729",
-      "bytes": 7192
+      "sha256": "741783d3def4a08df2a99b56ce0e40bd9d8c9c765e1b05fd56e5db1baa20baba",
+      "bytes": 7264
+    },
+    {
+      "path": "tests/test_epub_check.py",
+      "sha256": "3977fdbaa36590db8c8084c63fa014e9c150e49304de6614b465a781d9d3f102",
+      "bytes": 4818
+    },
+    {
+      "path": "tests/test_epub_editor.py",
+      "sha256": "3e18e4813c878b7882c20fa9bbd38d8affbf3adff965283f68c080a2980cf5c3",
+      "bytes": 15864
+    },
+    {
+      "path": "tests/test_epub_upgrade.py",
+      "sha256": "7fbbdcf039ce3ac7cb365c9317c422b4bf82e4e83d69027d63d0372cdf0a157b",
+      "bytes": 11069
     },
     {
       "path": "tests/test_isbn_cache.py",
-      "sha256": "55b3415fcb2ed00e32901da7e31e79762e5c9932fc7c564c9d77cfe20a68a9a6",
-      "bytes": 1004
+      "sha256": "681e94e184e8a2db60ef56f61d1ade660a439a529fdcdef4c89a55e71c7a0dda",
+      "bytes": 1259
+    },
+    {
+      "path": "tests/test_kepub.py",
+      "sha256": "08b913f359a7d13ba530e306b987f361c8a64df74b89dc102824c6e772da8e8b",
+      "bytes": 5469
+    },
+    {
+      "path": "tests/test_manual_cover.py",
+      "sha256": "1ff41424d31cab4f9ee8c8f2241bc9ac026e00fa313148e2222752499d341a02",
+      "bytes": 5164
+    },
+    {
+      "path": "tests/test_multi_source.py",
+      "sha256": "33d5f03f050636694425bfa6eefceeb19a339422fd06fb57d0dbc9f34f6cbfed",
+      "bytes": 8432
     },
     {
       "path": "tests/test_response_limit.py",
@@ -314,8 +494,8 @@
     },
     {
       "path": "tests/test_search_identity.py",
-      "sha256": "09085b24a0bd151355d6811d5d17f501f9613b25436bd067ac5d6a806b0177e2",
-      "bytes": 5448
+      "sha256": "3c11bb6d70ce61c991f92cf864cecfe0ff9994c7f1c4db2e9bc35050a0f2b3cb",
+      "bytes": 5744
     },
     {
       "path": "tests/test_source.py",
@@ -338,14 +518,24 @@
       "bytes": 10869
     },
     {
+      "path": "tools/kepub_roundtrip.mjs",
+      "sha256": "6a6cf3dfe0613dbf3754142367c9b077a57bbc95e41f736cc0db591063b31792",
+      "bytes": 696
+    },
+    {
       "path": "tools/prepare_release.py",
-      "sha256": "856de38baee921c5b42d52818065d0b0283512920cf71fefa821bf1b2401058c",
-      "bytes": 6437
+      "sha256": "3a72901f5c53026052905080299b3f4f5b06087e85f3d04fe026410be10f4ee9",
+      "bytes": 7378
+    },
+    {
+      "path": "tools/smoke_web.py",
+      "sha256": "e39591e722bf034a2327883609de5be10bc7eb30ec7f9e528252ddefb9a51039",
+      "bytes": 1334
     },
     {
       "path": "uv.lock",
-      "sha256": "6d1c7fc6463cfed0c0b237e7fdd970f14db98a6451398e4841ff687541f5ef7d",
-      "bytes": 79498
+      "sha256": "4b5f91d1c45b2c8f6b713f0324041547bfb3ca93b520658b440e4724f6f9744a",
+      "bytes": 103191
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "converter": "Kepubify 5.0.0 official npm / WebAssembly",
+  "environment": "local Node 24 and browser; not Docker/NAS/Kobo hardware",
+  "offline_tests": 141,
+  "real_conversion": true,
+  "kobo_spans_added": true,
+  "existing_kepub_chapters_and_kobo_span_ids_unchanged": true,
+  "chapter_text_unchanged": true,
+  "primary_identifier_unchanged": true,
+  "browser_console_errors": 0,
+  "output_sha256": "8f51ce0184d1e0de0bfa156299838f6de7a46f41cecdb6ead57304a19ac01d7c",
+  "metadata_edit_output_sha256": "8fa7083d85969dadb44fbd7d1016bb12171d5ec7c9141d8f2c8953026ffe847e",
+  "result": "success"
+}

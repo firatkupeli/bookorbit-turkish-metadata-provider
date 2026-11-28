@@ -18,8 +18,10 @@ from app.http import SourceHttpClient
 from app.models import Book, SearchRequest, SearchResult
 from app.service import ProviderService
 from app.sources.base import SourceRegistry
+from app.sources.binkitap import BinKitapSource
 from app.sources.kitapyurdu import KitapyurduSource
 from app.text import normalize_isbn, normalize_text
+from app.web import install_web
 
 logger = logging.getLogger("provider")
 
@@ -42,11 +44,24 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
                 "Accept-Language": "tr-TR,tr;q=0.9",
                 "Accept": "text/html",
             },
-            limits=httpx.Limits(max_connections=1, max_keepalive_connections=1),
+            limits=httpx.Limits(max_connections=2, max_keepalive_connections=2),
             transport=transport,
         ) as client:
             source = KitapyurduSource(SourceHttpClient(config, client), cache)
-            app.state.service = ProviderService(config, SourceRegistry([source]), cache)
+            bin_source = BinKitapSource(
+                SourceHttpClient(config, client, site="https://1000kitap.com"), cache
+            )
+            sources = [source, bin_source]
+            app.state.service = ProviderService(config, SourceRegistry(sources), cache)
+            app.state.cover_http = SourceHttpClient(
+                config, client, site="https://img.kitapyurdu.com", images=True
+            )
+            app.state.web_services = {
+                item.key: ProviderService(config, SourceRegistry([item]), cache) for item in sources
+            }
+            app.state.bin_cover_http = SourceHttpClient(
+                config, client, site="https://1k-cdn.com", images=True
+            )
             yield
 
     app = FastAPI(
@@ -146,4 +161,5 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             raise ProviderError("book_not_found", 404)
         return await request.app.state.service.lookup(provider_id)
 
+    install_web(app, authorize)
     return app

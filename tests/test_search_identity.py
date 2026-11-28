@@ -27,6 +27,12 @@ def identity_transport(*, broad_only=False, late_match=False, wrong_author=False
         calls.append(request)
         if request.url.path == "/robots.txt":
             return httpx.Response(200, text="User-agent: *\nAllow: /\n")
+        if request.url.host == "1000kitap.com" and request.url.path == "/ara":
+            return httpx.Response(
+                200,
+                text='<main class="govde-arama">Gösterilecek içerik bulunamadı.</main>',
+                headers={"Content-Type": "text/html"},
+            )
         params = request.url.params
         if params.get("route") == "product/list":
             term = params.get("filter_name")

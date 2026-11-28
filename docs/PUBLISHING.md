@@ -1,9 +1,10 @@
 # GitHub yayını ve sonraki sürümler
 
-> **0.1.2 erken beta yayımlandı.** İki mimarinin katmanları oturumsuz
-> indirilip doğrulandı. [Güncel denetim](REVIEW-AUDIT-0.1.2.md).
+> **0.4.0 yayın hazırlığı:** Kaynak paketi ve NAS testleri hazırdır. GitHub'a
+> kaynaklar yüklendikten sonra Tests, v0.4.0 etiketi ve Publish container
+> sırasıyla kontrol edilir. [Yayın notları taslağı](RELEASE-NOTES-0.4.0.md).
 
-## Yayımlanmış sürüm
+## Önceki yayımlanmış sürüm — 0.1.2
 
 - [Kaynak depo](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider)
 - [v0.1.2 erken beta](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/releases/tag/v0.1.2)

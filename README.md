@@ -1,22 +1,38 @@
-# BookOrbit Turkish Metadata Provider
+# Künye — EPUB & KEPUB Atölyesi
 
 [English](README.en.md)
 
-> **Yayımlanmış sürüm: 0.1.2 / erken beta.** ISBN, hata önceliği ve kapak
-> seçimi düzeltmelerini içerir. Hazır imaj amd64 ve arm64 için yayımlanmıştır.
-> [Denetim ve yayın doğrulaması](docs/REVIEW-AUDIT-0.1.2.md).
+> **0.4.0 / erken beta yayın adayı.**
+> Manuel JPG/PNG kapak yükleme, mevcut/kaynak/yüklenen kapakların gerçek
+> ölçüleri ve web arayüzünde kaynak seçimi eklendi. 1000Kitap deneysel kaynaktır.
+> BookOrbit aynı sağlayıcı adresinden Kitapyurdu ve 1000Kitap'ı birlikte arar.
+> EPUB 3, KEPUB ve indirmeden önce karşılaştırma korunur.
+> [Kullanım ve sınırlar](docs/KUNYE_PREVIEW.md).
+> BookOrbit API'si ve sağlayıcı kimliği korunur. NAS kurulumu ve kullanıcı
+> testleri tamamlandı. Hazır 0.4.0 imajını kullanmadan önce bu sürümün
+> **Publish container** işinin başarılı ve paketin Public olduğunu doğrulayın.
+
+> Önceki **0.1.2** imajı yalnız eski sağlayıcıyı içerir; Künye web arayüzü ve
+> 1000Kitap desteği için 0.4.0 gerekir. [Önceki sürüm denetimi](docs/REVIEW-AUDIT-0.1.2.md).
 
 BookOrbit için Python 3.12 ve FastAPI ile geliştirilmiş, MIT lisanslı Türkçe
 metadata sağlayıcısı. İlk kaynak **Kitapyurdu**; yeni kaynaklar ayrı adaptörlerle
-eklenebilir. BookOrbit veya Kitapyurdu'nun resmi ürünü değildir.
+eklenebilir. 0.4.0'da **1000Kitap** da deneysel olarak desteklenir.
+BookOrbit veya metadata kaynaklarının resmi ürünü değildir.
 
-**0.1.2 doğrulaması:** 92 otomatik test, resmi BookOrbit uygunluk denetimi,
-Docker derlemesi ve salt okunur konteyner kontrolleri
-[GitHub CI'da geçti](https://github.com/firatkupeli/bookorbit-turkish-metadata-provider/actions/runs/46052947375). İki mimarinin imaj katmanları
-oturumsuz indirilip SHA-256 ile doğrulandı. Kurucu, Synology DS224+ üzerinde
-0.1.2 hazır imajıyla BookOrbit denemesini tamamladığını bildirdi.
-Test kapsamı ve sınırlar: [güncel denetim](docs/REVIEW-AUDIT-0.1.2.md),
-[0.1.1 tarihsel doğrulaması](docs/VERIFICATION.md), [sürüm notları](CHANGELOG.md).
+BookOrbit'te `/search` iki kaynağı aynı toplam süre bütçesiyle arar; sonuçlar
+kaynaklar arasında dönüşümlü sıralanır. Tek kaynak hata verirse diğerinin
+sonuçları `partial: true` ile döner. `/book/kitapyurdu:<id>` kayıtları korunur;
+`/book/1000kitap:<id>` de desteklenir. Tek sağlayıcı adresi ve aynı Field Rules
+kullanılır. Web arayüzünde tek kaynak seçimi ayrıca çalışır.
+
+**0.4.0 doğrulaması:** 189 otomatik test, Ruff ve resmî BookOrbit uygunluk
+kontrolü geçti. Örnek EPUB 3 ve KEPUB çıktılarında EPUBCheck 5.4.0 hata veya
+uyarı bildirmedi. Kurucu NAS kurulumunu ve testlerini tamamladığını bildirdi.
+Bu, sınırlı kullanıcı kabul testidir; her kitap veya cihaz için garanti değildir.
+ARM64 fiziksel cihaz testi yapılmadı. [Doğrulama kapsamı](docs/KUNYE_PREVIEW.md),
+[makinece okunabilir kayıt](docs/preview-verification-0.4.0.json),
+[sürüm notları](CHANGELOG.md).
 
 ## Kaynak erişimi
 
@@ -37,7 +53,7 @@ Kendi kullanımınızın koşullara uygunluğunu kaynakla netleştirin.
 | --- | --- | --- |
 | Başlık / yazar | `title`, `authors` | UTF-8 ve Türkçe karakter desteği |
 | Açıklama | `description` | HTML temizlenir, düz metin döner |
-| Kapak | `cover` | Kaynaktaki gerçek görsel URL'si; proxy yapılmaz |
+| Kapak | `cover` | BookOrbit API'sinde gerçek URL; web editörü seçilen kapağı indirebilir |
 | Yayınevi | `publisher` | Baskıya ait değer |
 | Yayın tarihi / yılı | `publishedDate`, `publishedYear` | ISO tarih / dört haneli yıl |
 | Sayfa sayısı | `pages` | BookOrbit destek bildirimi: `pageCount` |
@@ -60,64 +76,57 @@ aliasları eşleşmeyebilir; bu durumda doğrulanmış ISBN kullanın.
 
 ## Docker ile kurulum
 
-Docker Engine ve Compose v2 gerekir. Herkese açık hazır imaj:
+Docker Engine ve Compose v2 gerekir. Genel pakette kişisel IP, ağ adı veya
+hazır erişim anahtarı bulunmaz; mevcut ağınızı `.env` içinde belirtin.
 
-```text
-ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
-```
+### Kaynak koddan kurulum — 0.4.0
 
-İmaj `linux/amd64` ve `linux/arm64` için yayımlanmıştır.
-Her iki mimarinin katmanları GitHub hesabı veya kişisel erişim anahtarı
-kullanılmadan indirilip SHA-256 özetleriyle doğrulanmıştır.
-
-### Hazır imajla kurulum
-
-1. Bu deponun dosyalarını tek klasöre çıkarın.
-2. `.env.example` dosyasını aynı klasörde `.env` adıyla kopyalayın.
-3. `.env` içindeki `BOOKORBIT_NETWORK` değerini BookOrbit **sunucu
-   konteynerinin** bağlı olduğu mevcut Docker ağıyla değiştirin.
-   `bookorbit_default` yalnız örnektir.
-4. Aynı `.env` dosyasındaki `PROVIDER_IMAGE` satırını şöyle ayarlayın:
-
-   ```dotenv
-   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.2
-   ```
-
-5. Proje klasöründe çalıştırın:
+1. Kaynak dosyalarını tek klasöre çıkarın; `Dockerfile`, `app` ve `main.py`
+   aynı kökte olmalıdır.
+2. `.env.example` dosyasını `.env` adıyla kopyalayın.
+3. `BOOKORBIT_NETWORK` alanına BookOrbit sunucu konteynerinin bağlı olduğu
+   mevcut Docker ağını yazın. Bu alan örnek dosyada boş bırakılmıştır.
+4. `PROVIDER_IMAGE` boşken proje klasöründe çalıştırın:
 
    ```sh
    docker compose config --quiet
-   docker compose pull
-   docker compose up -d --no-build
+   docker compose up -d --build
    docker compose ps
    ```
 
-GHCR'a giriş yapmak veya token tanımlamak gerekmez.
-`pull` hazır imajı indirir; `--no-build` yerel derlemeyi kapatır.
-
 Compose mevcut ağı kullanır; yeni ağ veya veritabanı oluşturmaz. Port 8080
-yalnız Docker ağına açılır. BookOrbit ve sağlayıcı aynı ağda olmalıdır.
+Docker ağına açılır. BookOrbit ve sağlayıcı aynı ağdan erişebilmelidir.
+Web düzenleyicisi aynı servisin `/` adresindedir.
 
-### Kaynak koddan derleme
+### Hazır 0.4.0 imajını kullanma
 
-Yerel derleme için `.env` içindeki `PROVIDER_IMAGE` değerini boş bırakın.
-`BOOKORBIT_NETWORK` değerini kendi mevcut ağınıza göre ayarlayıp çalıştırın:
+Bu yöntemi **v0.4.0 Publish container** işi başarıyla tamamlandıktan ve paket
+Public olduktan sonra kullanın. İmaj adresi:
+
+```dotenv
+PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.4.0
+```
+
+Kendi `.env` dosyanızda bu değeri ayarladıktan sonra:
 
 ```sh
 docker compose config --quiet
-docker compose up -d --build
+docker compose pull
+docker compose up -d --no-build
 docker compose ps
 ```
 
+Yayımlanmış Public imajı indirmek için GHCR oturumu veya kişisel token gerekmez.
+`--no-build` hazır imaj yerine yerel kaynak derlenmesini önler.
+
 ### Synology DS224+
 
-Ortak ağ veya isteğe bağlı macvlan sabit IP kurulumu için
-[adım adım Synology rehberini](docs/SYNOLOGY.md) kullanın.
-Hazır imaj kullanırken kendi ağ/IP ayarlarınızla birlikte `PROVIDER_IMAGE`
-değerini yukarıdaki GHCR adresine ayarlayın.
-
-DS224+ için `linux/amd64` kullanılır. ARM64 imajı da yayımlanmıştır;
-gerçek ARM cihaz üzerinde çalışma testi yapılmamıştır.
+Ortak ağ veya macvlan kurulumu için [Synology rehberini](docs/SYNOLOGY.md) kullanın.
+Ağ ve kullanılacak boş IP'yi kendi kurulumunuza göre girin. NAS kurulum
+klasöründe yalnız seçtiğiniz Compose dosyasını `docker-compose.yml` adıyla
+kullanın; alternatif örneği `.bak` olarak saklayabilirsiniz.
+DS224+ örneği `linux/amd64` içindir. Yayın iş akışı amd64/arm64 imajlarını
+hazırlar; fiziksel ARM64 çalışma testi yapılmamıştır.
 
 ## BookOrbit'e ekleme
 
@@ -160,9 +169,9 @@ ile onaylayın. İlk denemeyi toplu kütüphane üzerinde yapmayın.
 | --- | --- |
 | `BOOKORBIT_NETWORK` | Kurulumunuza göre zorunlu mevcut ağ |
 | `PROVIDER_IPV4_ADDRESS` | Yalnız macvlan örneğinde zorunlu boş sabit IP |
-| `PROVIDER_IMAGE` | Boş: yerel `bookorbit-turkish-metadata-provider:0.1.2` etiketi |
+| `PROVIDER_IMAGE` | Boş: yerel `bookorbit-turkish-metadata-provider:0.4.0` etiketi |
 | `AUTH_TOKEN` | Boş: kimlik doğrulama yok; ayarlıysa Bearer gerekir |
-| `USER_AGENT` | `BookOrbitTurkishMetadata/0.1.2`; mümkünse işletici iletişimi ekleyin |
+| `USER_AGENT` | `BookOrbitTurkishMetadata/0.4.0`; mümkünse işletici iletişimi ekleyin |
 | `SOURCE_INTERVAL_SECONDS` | 2; kaynak istekleri arasındaki en az süre |
 | `REQUEST_TIMEOUT_SECONDS` | 5; tek kaynak isteği süresi |
 | `DEADLINE_SECONDS` | 12; toplam arama bütçesi |
@@ -177,7 +186,7 @@ kopya bağımsız sınırlar oluşturur. Konteyner salt okunur dosya sistemi, ay
 kullanıcı ve 256 MiB bellek sınırıyla çalışır. CPU kotası gerektirmez.
 
 `/healthz` süreç sağlığını bildirir; Kitapyurdu erişiminin başarılı olduğunu
-göstermez. Ayrı admin paneli yoktur; ayarlar `.env` üzerinden yönetilir.
+göstermez. EPUB web editörü `/` adresindedir; sunucu ayarları `.env` ile yönetilir.
 FastAPI'nin etkileşimli API belgesi `/docs` adresindedir.
 
 ## API ve geliştirme

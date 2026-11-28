@@ -31,10 +31,11 @@ sabit adres kullanmak mümkündür; adres yine ağın alt ağında olmalıdır.
 3. `BOOKORBIT_NETWORK` değerine gerçek mevcut ağ adını yazın.
 4. Macvlan kullanıyorsanız `PROVIDER_IPV4_ADDRESS` alanına kendi boş IP'nizi girin.
    Bu alan ile ağ adı boşsa Compose bilerek hata verir.
-5. Hazır imaj için `.env` içindeki `PROVIDER_IMAGE` satırını ayarlayın:
+5. Hazır imajı yalnız v0.4.0 Publish container işi başarılı ve paket Public
+   olduktan sonra kullanın. `.env` içindeki `PROVIDER_IMAGE` satırını ayarlayın:
 
    ```dotenv
-   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.1.1
+   PROVIDER_IMAGE=ghcr.io/firatkupeli/bookorbit-turkish-metadata-provider:0.4.0
    ```
 
 6. Container Manager GUI'sinde hazır imajın kullanılmasını sağlamak için

@@ -1,0 +1,8 @@
+PASS  provider/info: name "BookOrbit Turkish Metadata Provider"
+PASS  provider/info: key "turkish-metadata"
+PASS  provider/info: color #00866a
+PASS  search: 1 match(es) in 625ms
+PASS  book/{id}: found "kitapyurdu:51855"
+PASS  book/{id}: unknown id answers 404
+
+0 failure(s), 0 warning(s)

@@ -27,11 +27,11 @@ def retry_seconds(value: str | None) -> int:
     return max(1, min(seconds, 86400))
 
 
-def validate_url(url: str) -> None:
+def validate_url(url: str, site: str = SITE) -> None:
     parsed = urlsplit(url)
     if (
         parsed.scheme != "https"
-        or parsed.netloc != "www.kitapyurdu.com"
+        or parsed.netloc != urlsplit(site).netloc
         or parsed.username
         or parsed.fragment
     ):
@@ -39,9 +39,11 @@ def validate_url(url: str) -> None:
 
 
 class SourceHttpClient:
-    def __init__(self, settings: Settings, client: httpx.AsyncClient):
+    def __init__(self, settings: Settings, client: httpx.AsyncClient, site=SITE, images=False):
         self.settings = settings
         self.client = client
+        self.site = site
+        self.images = images
         self._lock = asyncio.Lock()
         self._robots_lock = asyncio.Lock()
         self._policy: RobotFileParser | None = None
@@ -55,9 +57,9 @@ class SourceHttpClient:
         if remaining > 0:
             raise ProviderError("source_rate_limited", 429, math.ceil(remaining))
 
-    async def _raw(self, url: str, robots: bool = False) -> str:
+    async def _raw(self, url: str, robots: bool = False) -> str | bytes:
         for _ in range(4):
-            validate_url(url)
+            validate_url(url, self.site)
             if not robots and self._policy is not None:
                 if not self._policy.can_fetch(self.settings.user_agent, url):
                     raise ProviderError("source_robots_disallowed", 503)
@@ -72,6 +74,10 @@ class SourceHttpClient:
                 )
                 try:
                     async with self.client.stream("GET", url) as response:
+                        # Pace from received headers too: a busy event loop may delay dispatch.
+                        self._next_start = time.monotonic() + max(
+                            self.settings.source_interval_seconds, self._crawl_delay
+                        )
                         if response.status_code == 429:
                             delay = retry_seconds(response.headers.get("Retry-After"))
                             self._paused_until = time.monotonic() + delay
@@ -91,15 +97,23 @@ class SourceHttpClient:
                                 else "source_http_error"
                             )
                             raise ProviderError(code)
-                        if not robots and "text/html" not in response.headers.get(
-                            "content-type", ""
-                        ):
-                            raise ProviderError("source_invalid_content_type")
+                        if not robots:
+                            kind = response.headers.get("content-type", "").split(";")[0]
+                            valid = (
+                                kind in ("image/jpeg", "image/png")
+                                if self.images
+                                else kind == "text/html"
+                            )
+                            if not valid:
+                                raise ProviderError("source_invalid_content_type")
+                        limit = 5 * 1024 * 1024 if self.images and not robots else MAX_BODY
                         body = bytearray()
                         async for chunk in response.aiter_bytes():
-                            if len(body) + len(chunk) > MAX_BODY:
+                            if len(body) + len(chunk) > limit:
                                 raise ProviderError("source_response_too_large")
                             body.extend(chunk)
+                        if self.images and not robots:
+                            return bytes(body)
                         return body.decode("utf-8", errors="replace")
                 except httpx.TimeoutException:
                     raise ProviderError("source_timeout", 503) from None
@@ -112,14 +126,14 @@ class SourceHttpClient:
             if self._policy is not None and time.monotonic() < self._robots_expires:
                 return
             try:
-                text = await self._raw(SITE + "/robots.txt", robots=True)
+                text = await self._raw(self.site + "/robots.txt", robots=True)
             except ProviderError as error:
                 if error.status == 429:
                     raise
                 raise ProviderError("source_robots_unavailable", 503) from None
             if "user-agent:" not in text.lower():
                 raise ProviderError("source_robots_invalid", 503)
-            policy = RobotFileParser(SITE + "/robots.txt")
+            policy = RobotFileParser(self.site + "/robots.txt")
             policy.parse(text.splitlines())
             self._policy = policy
             self._robots_expires = time.monotonic() + 3600
@@ -128,8 +142,8 @@ class SourceHttpClient:
             if rate and rate.requests:
                 self._crawl_delay = max(self._crawl_delay, rate.seconds / rate.requests)
 
-    async def get(self, url: str) -> str:
-        validate_url(url)
+    async def get(self, url: str) -> str | bytes:
+        validate_url(url, self.site)
         self._check_pause()
         await self._ensure_robots()
         return await self._raw(url)

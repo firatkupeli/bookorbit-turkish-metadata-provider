@@ -145,13 +145,12 @@ def test_api_rate_limit(source_transport):
 
 
 def test_failures_are_not_empty_or_cached():
-    attempts = 0
+    attempts = {}
 
     def handle(request):
-        nonlocal attempts
         if request.url.path == "/robots.txt":
             return httpx.Response(200, text="User-agent: *\nAllow: /\n")
-        attempts += 1
+        attempts[request.url.host] = attempts.get(request.url.host, 0) + 1
         return httpx.Response(
             200, text="<h1>Just a moment...</h1>", headers={"Content-Type": "text/html"}
         )
@@ -163,7 +162,7 @@ def test_failures_are_not_empty_or_cached():
             response = client.get("/search?query=private-title")
             assert response.status_code == 502
             assert response.json() == {"error": "source_search_markup_changed"}
-    assert attempts == 2
+    assert attempts == {"www.kitapyurdu.com": 2, "1000kitap.com": 2}
 
 
 def test_turkish_query_is_utf8_and_never_sent_as_credentials(client):

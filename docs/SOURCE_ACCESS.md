@@ -14,7 +14,10 @@ ve gerçek HTTP yanıtlarıyla doğrulanan şu HTML yollarını kullanır:
 - Kanonik örnek:
   [Otomatik Portakal](https://www.kitapyurdu.com/kitap/otomatik-portakal-ciltsiz/51855.html).
 - Kitap JSON-LD'si ve görünür ürün alanları; kapakta sayfanın gerçek
-  `img.kitapyurdu.com` URL'si. Kapak sağlayıcıdan proxy edilmez.
+  `img.kitapyurdu.com` URL'si. BookOrbit API'si URL döndürür. 0.2.0 web editörü,
+  kullanıcı bir baskı seçtiğinde kapak önizlemesini bu sabit HTTPS kaynağından
+  alır; seçilen kapak indirilmiş EPUB'a eklenebilir. Görsel sunucusunun
+  robots.txt kuralları, istek aralığı, boyut sınırı ve yönlendirme denetimi uygulanır.
 
 Gizli/mobil API, hesap oturumu, tahmini JSON uç noktası, CAPTCHA çözümü veya
 403 engeli aşımı kullanılmaz. Aynı HTTPS origin'ine en fazla üç yönlendirme
@@ -52,3 +55,23 @@ sahiplerine aittir. Depoda kapak dosyası, tam kaynak sayfa arşivi veya toplu
 metadata veri seti yayımlanmaz; testlerde biçim doğrulaması için küçültülmüş
 HTML parçaları bulunur. Bkz. [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 Yeni bir kaynak eklenirken aynı erişim ve koşul incelemesi ayrı yapılmalıdır.
+
+## 1000Kitap — 0.4.0 deneysel kaynak
+
+2026-11-28 tarihinde herkese açık HTML arama formundaki `/ara?q=…&bolum=kitaplar`
+ve `/kitap/<sayısal-kimlik>` yolları doğrulandı. Kitap bilgisi sayfanın
+`application/ld+json` Book kaydından okunur. Bu resmi API entegrasyonu değildir.
+Yalnız `1000kitap.com` kitap sayfaları ve gözlenen `1k-cdn.com` kapak sunucusu
+kullanılır; kullanıcıların verdiği başka sunuculara istek gönderilmez.
+
+[1000Kitap robots.txt](https://1000kitap.com/robots.txt) ve
+[kapak sunucusu robots.txt](https://1k-cdn.com/robots.txt) aynı erişim
+denetiminden geçer. Giriş, CAPTCHA aşımı veya özel API kullanılmaz. Otomatik
+erişim ve içerik yeniden kullanımı için ayrıca açık izin doğrulanmadı;
+robots.txt bir içerik lisansı değildir. Tam açıklamalar ve kapak dosyaları
+test kayıtlarına veya yayın paketine kopyalanmaz.
+
+Bir kitapta tam ISBN eşleşmesi, boş önbellekle sayısal kimlikten yeniden
+erişim ve 275 × 385 piksel JPEG kapağın okunması doğrulandı. Bu sınırlı
+deneme kaynak kapsamı veya her baskıyı bulma garantisi değildir. Uyumsuz HTML,
+erişim engeli veya süre aşımı kullanıcıya hata/kısmi sonuç olarak bildirilir.
