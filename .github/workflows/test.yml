@@ -24,6 +24,9 @@ jobs:
         with:
           go-version: stable
           cache: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
       - name: Install dependencies
         run: python -m pip install -r requirements.txt -r requirements-dev.txt
       - name: Check formatting and code
@@ -58,7 +61,7 @@ jobs:
       - name: Check read-only container
         shell: bash
         run: |
-          docker run -d --name provider-ci --init --read-only --tmpfs /tmp:rw,size=16m --cap-drop ALL --security-opt no-new-privileges --memory 256m -p 127.0.0.1:8080:8080 bookorbit-turkish-metadata-provider:test
+          docker run -d --name provider-ci --init --read-only --tmpfs /tmp:rw,size=64m --cap-drop ALL --security-opt no-new-privileges --memory 256m -p 127.0.0.1:8080:8080 bookorbit-turkish-metadata-provider:test
           trap 'docker rm -f provider-ci > /dev/null 2>&1 || true' EXIT
           ready=false
           for attempt in $(seq 1 30); do
@@ -75,3 +78,4 @@ jobs:
           curl -fsS http://127.0.0.1:8080/provider/info
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/search)" = 400
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/book/conformance-unknown-id)" = 404
+          python -m tools.smoke_web http://127.0.0.1:8080
